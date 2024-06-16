@@ -1,0 +1,69 @@
+@charset "UTF-8";
+
+table {
+    width: 100%; /* Define a largura da tabela como 100% da largura da tela */
+    border-collapse: collapse; /* Mescla as bordas das células */
+}
+
+th, td {
+    border: 1px solid black; /* Define uma borda de 1 pixel para as células */
+    padding: 8px; /* Adiciona espaço interno às células */
+    text-align: left; /* Alinha o texto à esquerda nas células */
+}
+
+th {
+    background-color: #f2f2f2; /* Define uma cor de fundo para as células do cabeçalho */
+}
+
+h1 {
+    padding: 10px;
+    font-size: 50px;
+    text-shadow: 4px 4px #90c1f3;
+    text-align: center;
+    border-radius: 40px;
+}
+
+h3#principal {
+    padding-left: 30px; /* Adiciona um espaço à esquerda */
+    font-size: 18px;
+    color: blue;
+}
+
+ul {
+    background: black;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    text-align: center;
+}
+
+li {
+    display: inline-block;
+    /* Removido float: left; para centralização adequada */
+}
+
+li a {
+    color: white;
+    padding: 20px 20px 20px 30px; /* Combina padding-right e padding-left */
+    text-decoration: none;
+    text-align: center;
+}
+
+li a:hover, .dropdown:hover .dropbtn {
+    background: blue;
+}
+
+.container img {
+    float: left;
+}
+
+img {
+    width: 100px;
+    padding-top: 10px;
+    padding-left: 100px;
+}
+
+.acoes-column {
+    text-align: center;
+}

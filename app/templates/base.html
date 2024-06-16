@@ -1,0 +1,60 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="{% static 'css/estilo.css' %}">
+    <title>
+        {% block title %}
+            SEVERUS - Técnologia
+        {% endblock %}
+    </title>
+</head>
+<body>
+    <div class="container">
+        <img src="{% static 'img/icon.png' %}" alt="Icon">
+        <h1>SEVERUS - Técnologia</h1>
+    </div>
+
+	{% block body %}
+			<header>
+			<nav>
+				<ul>
+					<li>
+						<a href="#" name="adcionar">Adicionar</a>
+					</li>
+					<li>
+						<a href="#" name="contatos">Contatos</a>
+					</li>
+					<li>
+						<a href="#" name="agendamentos">Agendamentos</a>
+					</li>
+					<li>
+						<a href="#" name="servicos">Serviços</a>
+					</li>
+					<li>
+						<a href="#" name="ocorrencias">Ocorrências</a>
+					</li>
+					<li>
+						<a href="#" name="telefones">Telefones</a>
+					</li>
+					<li>
+						<a href="#" name="informacoes">Informações</a>
+					</li>
+				</ul>
+			</nav>
+		</header>
+
+	{% endblock %}
+
+		<main>
+
+		</main>
+	<hr>
+	<footer style="background-color: black; text-align: center;">
+		<span style="color:white;">&copy; 2024 Tattica Técnologia. Todos os direitos reservados. || Powered_by: @NDI</span>
+	</footer>
+
+</body>
+</html>
+
