@@ -23,8 +23,11 @@ class Abastecimentos(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'abastecimentos'
+        
+        def __str__(self):
+            return f"Abastecimento em {self.data_abastecimento} - Veículo: {self.tattica_veiculo}, Funcionário: {self.tattica_funcionario}"
 
 
 class AberturasPortas(models.Model):
@@ -605,13 +608,16 @@ class Condominios(models.Model):
     distancia = models.IntegerField(blank=True, null=True)
     link_ri = models.CharField(max_length=220, blank=True, null=True)
     empresa = models.IntegerField(blank=True, null=True)
-    status = models.IntegerField()
+    status = models.IntegerField(default=1)
     created = models.DateTimeField(blank=True, null=True)
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
         managed = False
         db_table = 'condominios'
+
+    def __str__(self):
+        return self.nome_condominio
 
 
 class CondominiosFeriados(models.Model):
@@ -1119,6 +1125,9 @@ class EntregadoresNormas(models.Model):
         managed = False
         db_table = 'entregadores_normas'
 
+    def __str__(self):
+        return self.nome_entregador_normas
+
 
 class EstadosEquipamentos(models.Model):
     nome_estados_equipamento = models.CharField(max_length=220)
@@ -1274,6 +1283,9 @@ class Funcionarios(models.Model):
         managed = False
         db_table = 'funcionarios'
 
+    def __str__(self):
+        return self.nome_funcionario
+
 
 class GruposEventos(models.Model):
     nome_grupo_evento = models.CharField(max_length=45)
@@ -1406,6 +1418,9 @@ class Internets(models.Model):
     class Meta:
         managed = False
         db_table = 'internets'
+
+    def __str__(self):
+        return self.nome_internet
 
 
 class ItensCadastrados(models.Model):
@@ -1578,6 +1593,9 @@ class MudancasNormas(models.Model):
     class Meta:
         managed = False
         db_table = 'mudancas_normas'
+
+    def __str__(self):
+        return self.nome_mudanca_normas
 
 
 class Notificacoes(models.Model):
@@ -1962,6 +1980,9 @@ class PrestadoresNormas(models.Model):
         managed = False
         db_table = 'prestadores_normas'
 
+    def __str__(self):
+        return self.nome_prestador_normas
+
 
 class Projetos(models.Model):
     tipos_projeto = models.ForeignKey('TiposProjetos', models.DO_NOTHING)
@@ -2106,6 +2127,9 @@ class ReservasNormas(models.Model):
         managed = False
         db_table = 'reservas_normas'
 
+    def __str__(self):
+        return self.nome_reserva_normas
+
 
 class Roles(models.Model):
     nome_role = models.CharField(max_length=220)
@@ -2184,6 +2208,9 @@ class SubtiposTiposAbastecimentos(models.Model):
         managed = False
         db_table = 'subtipos_tipos_abastecimentos'
 
+    def __str__(self):
+        return self.nome_subtipo
+
 
 class Suporteunidades(models.Model):
     nome_suporteunidade = models.CharField(max_length=100)
@@ -2194,6 +2221,9 @@ class Suporteunidades(models.Model):
     class Meta:
         managed = False
         db_table = 'suporteunidades'
+
+    def __str__(self):
+        return self.nome_suporteunidade
 
 
 class Tarefas(models.Model):
@@ -2253,6 +2283,9 @@ class TatticaFuncionarios(models.Model):
         managed = False
         db_table = 'tattica_funcionarios'
 
+    def __str__(self):
+        return self.nome_funcionario
+
 
 class TatticaTelefones(models.Model):
     condominio = models.ForeignKey(Condominios, models.DO_NOTHING, blank=True, null=True)
@@ -2288,8 +2321,10 @@ class TatticaVeiculos(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'tattica_veiculos'
+def __str__(self):
+    return self.tattica_veiculo
 
 
 class TiposAbastecimentos(models.Model):
@@ -2300,10 +2335,13 @@ class TiposAbastecimentos(models.Model):
     subtipos_tipos_abastecimentos = models.ForeignKey(SubtiposTiposAbastecimentos, models.DO_NOTHING, blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'tipos_abastecimentos'
 
-
+    def __str__(self):
+        return self.nome_abastecimentos
+        
+        
 class TiposAcessos(models.Model):
     nome_tipos_acesso = models.CharField(max_length=220, blank=True, null=True)
     status = models.IntegerField()
@@ -2612,6 +2650,9 @@ class Unidades(models.Model):
         managed = False
         db_table = 'unidades'
 
+    def __str__(self):
+        return self.nome_unidade
+
 
 class Users(models.Model):
     role = models.ForeignKey(Roles, models.DO_NOTHING)
@@ -2671,6 +2712,9 @@ class Veiculos(models.Model):
     class Meta:
         managed = False
         db_table = 'veiculos'
+
+    def __str__(self):
+        return self.placa
 
 
 class Vistorias(models.Model):

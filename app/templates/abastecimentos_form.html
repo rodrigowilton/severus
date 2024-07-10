@@ -1,0 +1,149 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block menu %}{% endblock %}
+
+{% block titulofixo %}{% endblock %}
+
+{% block img %}{% endblock %}
+
+{% block conteudo %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abastecimento</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/estilo.css' %}">
+    <style>
+        body {
+            background-image: url("{% static 'img/fundo.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f2f2f2;
+        }
+
+        .title-container {
+            width: 100%;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .form-container {
+            width: 100%;
+            max-width: 1200px; /* Defina um valor máximo para evitar que o formulário fique muito largo em telas grandes */
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        .form-container form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Distribui os campos em colunas automáticas responsivas */
+            gap: 15px;
+            align-items: start;
+            padding: 10px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+        }
+
+        .form-group label {
+            margin-bottom: 5px;
+        }
+
+        .form-group input, .form-group select {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .form-actions {
+            grid-column: span 2;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .form-actions button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #28a745;
+            color: #fff;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Abastecimento</h1>
+    <hr style="border-top: 1px solid black;">
+    <div class="title-container">
+    </div>
+    <div class="form-container">
+        <h3>Preencha os campos:</h3>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="tattica_veiculo"><b>Veículo</b></label>
+                {{ form.tattica_veiculo }}
+            </div>
+            <div class="form-group">
+                <label for="tipos_abastecimento"><b>Tipo de Abastecimento</b></label>
+                {{ form.tipos_abastecimento }}
+            </div>
+            <div class="form-group">
+                <label for="tattica_funcionario"><b>>Funcionário</b></label>
+                {{ form.tattica_funcionario }}
+            </div>
+            <div class="form-group">
+                <label for="data_abastecimento"><b>Data do Abastecimento</b></label>
+                {{ form.data_abastecimento }}
+            </div>
+            <div class="form-group">
+                <label for="km_atual"><b>KM Atual</b></label>
+                {{ form.km_atual }}
+            </div>
+            <div class="form-group">
+                <label for="numero_bloco"><b>Número do Bloco</b></label>
+                {{ form.numero_bloco }}
+            </div>
+            <div class="form-group">
+                <label for="qtd_litros"><b>Quantidade de Litros</b></label>
+                {{ form.qtd_litros }}
+            </div>
+            <div class="form-group">
+                <label for="total"><b>Total</b></label>
+                {{ form.total }}
+            </div>
+            <div class="form-group">
+                <label for="valor_por_litro"><b>Valor por Litro</b></label>
+                {{ form.valor_por_litro }}
+            </div>
+            <div class="form-group">
+                <label for="status"><b>Status</b></label>
+                {{ form.status }}
+            </div>
+            <div class="form-actions">
+                <button type="submit">Salvar</button>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>
+{% endblock %}

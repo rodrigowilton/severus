@@ -1,0 +1,226 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block menu %}{% endblock %}
+
+{% block img %}
+
+{% endblock %}
+
+{% block titulofixo %}
+    <h1>Condomínio</h1>
+{% endblock %}
+
+{% block conteudo %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Condomínio</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet1" href="{% static 'css/estilo.css' %}">
+    <style>
+        body {
+            background-image: url("{% static 'img/fundo.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: rgba(242, 242, 242, 0.5); /* Cor de fundo de fallback */
+        }
+
+        .title-container {
+            width: 100%;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .form-container {
+            width: 100%;
+            max-width: 1200px; /* Defina um valor máximo para evitar que o formulário fique muito largo em telas grandes */
+            background-color: rgba(255, 255, 255, 0.8); /* Cor de fundo do formulário com transparência */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        .form-container form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Distribui os campos em colunas automáticas responsivas */
+            gap: 15px;
+            align-items: start;
+            padding: 10px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+        }
+
+        .form-group label {
+            margin-bottom: 5px;
+        }
+
+        .form-group input, .form-group select {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .form-actions {
+            grid-column: span 2;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .form-actions button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #28a745;
+            color: #fff;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="title-container">
+    </div>
+    <div class="form-container">
+        <h3>Preencha os campos:</h3>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="internet"><b>Internet</b></label>
+                {{ form.internet }}
+            </div>
+            <div class="form-group">
+                <label for="unidade"><b>Tipo de Unidade</b></label>
+                {{ form.unidade }}
+            </div>
+            <div class="form-group">
+                <label for="suporteunidade"><b>Suporte Unidade</b></label>
+                {{ form.suporteunidade }}
+            </div>
+            <div class="form-group">
+                <label for="entregadores_norma"><b>Data do Entregadores Norma</b></label>
+                {{ form.entregadores_norma }}
+            </div>
+            <div class="form-group">
+                <label for="prestadores_norma"><b>Prestadores Norma</b></label>
+                {{ form.prestadores_norma }}
+            </div>
+            <div class="form-group">
+                <label for="reservas_norma"><b>Reservas Norma</b></label>
+                {{ form.reservas_norma }}
+            </div>
+            <div class="form-group">
+                <label for="mudancas_norma"><b>Mudanças Norma</b></label>
+                {{ form.mudancas_norma }}
+            </div>
+            <div class="form-group">
+                <label for="responsavel_tattica"><b>Responsável Tattica</b></label>
+                {{ form.responsavel_tattica }}
+            </div>
+            <div class="form-group">
+                <label for="norma_observacao"><b>Norma Observação</b></label>
+                {{ form.norma_observacao }}
+            </div>
+            <div class="form-group">
+                <label for="nome_condominio"><b>Nome Condomínio</b></label>
+                {{ form.nome_condominio }}
+            </div>
+            <div class="form-group">
+                <label for="data_condominio"><b>Data Condomínio</b></label>
+                {{ form.data_condominio }}
+            </div>
+            <div class="form-group">
+                <label for="dias_implantacao"><b>Dias Implantação</b></label>
+                {{ form.dias_implantacao }}
+            </div>
+            <div class="form-group">
+                <label for="ramal_condominio"><b>Ramal Condomínio</b></label>
+                {{ form.ramal_condominio }}
+            </div>
+            <div class="form-group">
+                <label for="ramal_interno"><b>Ramal Interno</b></label>
+                {{ form.ramal_interno }}
+            </div>
+            <div class="form-group">
+                <label for="telefone"><b>Telefone</b></label>
+                {{ form.telefone }}
+            </div>
+            <div class="form-group">
+                <label for="cnpj"><b>Cnpj</b></label>
+                {{ form.cnpj }}
+            </div>
+            <div class="form-group">
+                <label for="cep"><b>Cep</b></label>
+                {{ form.cep }}
+            </div>
+            <div class="form-group">
+                <label for="numero"><b>Número</b></label>
+                {{ form.numero }}
+
+                <label for="logradouro"><b>Logradouro</b></label>
+                {{ form.logradouro }}
+            </div>
+            <div class="form-group">
+                <label for="complemento"><b>Complemento</b></label>
+                {{ form.complemento }}
+
+                <label for="bairro"><b>Bairro</b></label>
+                {{ form.bairro }}
+            </div>
+            <div class="form-group">
+                <label for="cidade"><b>Cidade</b></label>
+                {{ form.cidade }}
+            </div>
+            <div class="form-group">
+                <label for="uf"><b>Uf</b></label>
+                {{ form.uf }}
+            </div>
+            <div class="form-group">
+                <label for="website"><b>Website</b></label>
+                {{ form.website }}
+            </div>
+            <div class="form-group">
+                <label for="website_agendamento"><b>Website Agendamento</b></label>
+                {{ form.website_agendamento }}
+            </div>
+            <div class="form-group">
+                <label for="responsavel_tattica"><b>Responsavel Tattica</b></label>
+                {{ form.responsavel_tattica }}
+            </div>
+            <div class="form-group">
+                <label for="financeiro_email"><b>Email</b></label>
+                {{ form.financeiro_email }}
+            </div>
+            <div class="form-group">
+                <label for="status"><b>Status</b></label>
+                <input type="hidden" id="status" name="status" value="1">
+                <p>Ativo</p> <!-- Ou exiba o valor padrão de outra forma -->
+            </div>
+
+
+            <div class="form-actions">
+                <button type="submit">Salvar</button>
+            </div>
+            <a href="{% url 'condominio_list' %}">Voltar para a lista de condomínios</a>
+
+        </form>
+    </div>
+</body>
+
+</html>
+{% endblock %}

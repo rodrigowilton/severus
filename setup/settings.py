@@ -8,8 +8,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
-TEMPLATE_DIR = os.path.join(BASE_DIR, 'template')
-STATIC_DIR = os.path.join(BASE_DIR, 'template')
+TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
+STATIC_DIR = os.path.join(BASE_DIR, 'templates')
 
 
 # Quick-start development settings - unsuitable for production
@@ -75,7 +75,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'tattica',
         'USER': 'root',
-        'PASSWORD': '29104130',
+        'PASSWORD': '123456',
         'HOST': 'localhost',
         'PORT': '3306'
     }
