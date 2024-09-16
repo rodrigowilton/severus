@@ -4,12 +4,17 @@
 
 {% block menu %}{% endblock %}
 
-{% block img %}
-
-{% endblock %}
+{% block img %}{% endblock %}
 
 {% block titulofixo %}
-    <h1>Condomínio</h1>
+
+    <h1>Cadastro Condomínio</h1>
+
+    <div>
+        <a href="{% url 'index' %}" style="margin: 300px;">Voltar para o início</a>
+        <a href="{% url 'condominio_list' %}" style="margin: 300px;">lista de condomínios</a>
+    </div>
+
 {% endblock %}
 
 {% block conteudo %}
@@ -22,7 +27,7 @@
     <title>Condomínio</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet1" href="{% static 'css/estilo.css' %}">
+    <link rel="stylesheet" href="{% static 'css/estilo.css' %}">
     <style>
         body {
             background-image: url("{% static 'img/fundo.jpg' %}");
@@ -50,6 +55,9 @@
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             margin-top: 20px;
+            max-height: 80vh; /* Defina a altura máxima para permitir a rolagem */
+            overflow-y: auto; /* Permite a rolagem vertical */
+
         }
 
         .form-container form {
@@ -171,14 +179,12 @@
             <div class="form-group">
                 <label for="numero"><b>Número</b></label>
                 {{ form.numero }}
-
                 <label for="logradouro"><b>Logradouro</b></label>
                 {{ form.logradouro }}
             </div>
             <div class="form-group">
                 <label for="complemento"><b>Complemento</b></label>
                 {{ form.complemento }}
-
                 <label for="bairro"><b>Bairro</b></label>
                 {{ form.bairro }}
             </div>
@@ -211,13 +217,9 @@
                 <input type="hidden" id="status" name="status" value="1">
                 <p>Ativo</p> <!-- Ou exiba o valor padrão de outra forma -->
             </div>
-
-
             <div class="form-actions">
                 <button type="submit">Salvar</button>
             </div>
-            <a href="{% url 'condominio_list' %}">Voltar para a lista de condomínios</a>
-
         </form>
     </div>
 </body>

@@ -1,5 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
+{% block head %}
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
@@ -10,7 +11,7 @@
     <!-- Adicione isso no seu <head> -->
     	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
-
+{% endblock %}
     <style>
 
         header {
@@ -85,7 +86,6 @@
             padding-top: 10px; /* ajuste o valor conforme necessário */
         }
     </style>
-</head>
 <br>
 {% block menu %}
     <header>
@@ -122,7 +122,7 @@
 				{% endblock %}
             </div>
 
-                <h1 style="color: #19197a; text-shadow: 5px 5px #90c1f3;"><b>SEVERUS</b> - Técnologia</h1>
+                <h1 style="color: #19197a; text-shadow: 5px 5px #90c1f3;"><b>SEVERUS</b> - Gestão da Segurança e Técnologia</h1>
         </div>
     </div>
 	{% endblock %}

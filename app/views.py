@@ -1,6 +1,6 @@
 import requests
 import webbrowser
-from .forms import AbastecimentosForm, CondominiosForm
+from .forms import AbastecimentosForm, CondominiosForm, CondominiosEditForm
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect, redirect
 from app.models import (Apartamentos, Abastecimentos, AberturasPortas, AcessosApp, AgendamentoHorarios,
@@ -141,3 +141,23 @@ def condominio_list(request):
     condominios = Condominios.objects.all().order_by('nome_condominio')
     return render(request, 'condominios.html', {'condominios': condominios})
 
+
+from django.shortcuts import render, get_object_or_404, redirect
+from .models import Condominios
+from .forms import CondominiosEditForm
+
+def editar_condominio(request, pk):
+    condominio = get_object_or_404(Condominios, pk=pk)
+    if request.method == 'POST':
+        form = CondominiosEditForm(request.POST, instance=condominio)
+        if form.is_valid():
+            form.save()
+            return redirect('index')  # Redireciona para a página inicial após a edição
+    else:
+        form = CondominiosEditForm(instance=condominio)
+    return render(request, 'app/editar_condominio.html', {'form': form, 'condominio': condominio})
+
+
+def consultar_condominio(request, pk):
+    condominio = get_object_or_404(Condominios, pk=pk)
+    return render(request, 'app/consultar_condominio.html', {'condominio': condominio})
