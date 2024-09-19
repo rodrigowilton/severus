@@ -29,6 +29,10 @@ TiposSindicos, TiposTarefas, TiposVeiculos, TiposZonas, Tips, TipsTatticaFuncion
 Vistorias, VistoriasItensVistorias, Zonas)
 
 
+def login(request):
+    return render(request, 'login.html')
+
+
 def index(request):
     condominios = Condominios.objects.all().order_by('nome_condominio')
     return render(request, 'index.html', {'condominios': condominios})

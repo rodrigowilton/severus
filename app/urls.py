@@ -1,9 +1,13 @@
 # urls.py
 from django.urls import path
-from . import views
+from usuarios import views
+from app import views
+
+
 
 urlpatterns = [
-    path('app/', views.index, name='index'),
+    path('app/', views.login, name='login'),
+    path('', views.index, name='index'),
     path('abastecimentos/new/', views.abastecimento_create, name='abastecimento-create'),
     path('condominios/new/', views.condominio_create, name='condominio-create'),
     path('condominios/', views.condominio_list, name='condominio_list'),

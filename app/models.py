@@ -47,7 +47,7 @@ class AberturasPortas(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'aberturas_portas'
 
 
@@ -56,7 +56,8 @@ class AcessosApp(models.Model):
     data_acesso = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
+
         db_table = 'acessos_app'
 
 
@@ -70,7 +71,7 @@ class AgendamentoHorarios(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'agendamento_horarios'
 
 
@@ -93,7 +94,7 @@ class Agendamentos(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'agendamentos'
 
 
@@ -109,7 +110,7 @@ class Apartamentos(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'apartamentos'
 
 
@@ -150,7 +151,7 @@ class Areas(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'areas'
 
 
@@ -163,7 +164,7 @@ class AreasParalelas(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'areas_paralelas'
 
 
@@ -185,7 +186,7 @@ class Atendimentos(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'atendimentos'
 
 
@@ -205,7 +206,7 @@ class Atividades(models.Model):
     observacao_cli = models.TextField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'atividades'
 
 
@@ -219,7 +220,7 @@ class AtividadesMateriaisProdutos(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'atividades_materiais_produtos'
 
 
@@ -232,7 +233,7 @@ class AtividadesOrdemdeservicos(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'atividades_ordemdeservicos'
 
 
@@ -240,8 +241,8 @@ class AuthGroup(models.Model):
     name = models.CharField(unique=True, max_length=150)
 
     class Meta:
-        managed = False
-        db_table = 'auth_group'
+        managed = True
+        db_table = 'app_auth_group'
 
 
 class AuthGroupPermissions(models.Model):
@@ -250,8 +251,8 @@ class AuthGroupPermissions(models.Model):
     permission = models.ForeignKey('AuthPermission', models.DO_NOTHING)
 
     class Meta:
-        managed = False
-        db_table = 'auth_group_permissions'
+        managed = True
+        db_table = 'app_auth_group_permissions'
         unique_together = (('group', 'permission'),)
 
 
@@ -261,8 +262,8 @@ class AuthPermission(models.Model):
     codename = models.CharField(max_length=100)
 
     class Meta:
-        managed = False
-        db_table = 'auth_permission'
+        managed = True
+        db_table = 'app_auth_permission'
         unique_together = (('content_type', 'codename'),)
 
 
@@ -279,8 +280,8 @@ class AuthUser(models.Model):
     date_joined = models.DateTimeField()
 
     class Meta:
-        managed = False
-        db_table = 'auth_user'
+        managed = True
+        db_table = 'app_auth_user'
 
 
 class AuthUserGroups(models.Model):
@@ -289,8 +290,8 @@ class AuthUserGroups(models.Model):
     group = models.ForeignKey(AuthGroup, models.DO_NOTHING)
 
     class Meta:
-        managed = False
-        db_table = 'auth_user_groups'
+        managed = True
+        db_table = 'app_auth_user_groups'
         unique_together = (('user', 'group'),)
 
 
@@ -300,8 +301,8 @@ class AuthUserUserPermissions(models.Model):
     permission = models.ForeignKey(AuthPermission, models.DO_NOTHING)
 
     class Meta:
-        managed = False
-        db_table = 'auth_user_user_permissions'
+        managed = True
+        db_table = 'app_auth_user_user_permissions'
         unique_together = (('user', 'permission'),)
 
 
@@ -324,7 +325,7 @@ class CamFacials(models.Model):
     pgm = models.ForeignKey('Pgms', models.DO_NOTHING, blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'cam_facials'
 
 
@@ -338,7 +339,7 @@ class CardsElevadors(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'cards_elevadors'
 
 
@@ -362,7 +363,7 @@ class CentraisJfls(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'centrais_jfls'
 
 
@@ -384,7 +385,7 @@ class Chamadas(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'chamadas'
 
 
@@ -402,7 +403,7 @@ class ChavesVirtuais(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'chaves_virtuais'
 
 
@@ -413,7 +414,7 @@ class ChecklistObras(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'checklist_obras'
 
 
@@ -427,7 +428,7 @@ class Codigos(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'codigos'
 
 
@@ -440,7 +441,7 @@ class ComercialEtapas(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'comercial_etapas'
 
 
@@ -455,7 +456,7 @@ class ComercialLeadEtapas(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'comercial_lead_etapas'
 
 
@@ -471,7 +472,7 @@ class ComercialLeadProcessos(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'comercial_lead_processos'
 
 
@@ -492,7 +493,7 @@ class ComercialLeads(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'comercial_leads'
 
 
@@ -509,7 +510,7 @@ class ComercialProcessos(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'comercial_processos'
 
 
@@ -528,7 +529,7 @@ class ComercialProspeccao(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'comercial_prospeccao'
 
 
@@ -542,7 +543,7 @@ class Comodatos(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'comodatos'
 
 
@@ -561,7 +562,7 @@ class CondominioEquipamentos(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'condominio_equipamentos'
 
 
@@ -613,7 +614,7 @@ class Condominios(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'condominios'
 
     def __str__(self):
@@ -628,7 +629,7 @@ class CondominiosFeriados(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'condominios_feriados'
 
 
@@ -649,7 +650,7 @@ class CondominiosFuncionarios(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'condominios_funcionarios'
 
 
@@ -661,7 +662,7 @@ class CondominiosFuncionariosDispositivosRoles(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'condominios_funcionarios_dispositivos_roles'
 
 
@@ -684,7 +685,7 @@ class ConfigFacials(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'config_facials'
 
 
@@ -698,7 +699,7 @@ class ConfigOs(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'config_os'
 
 
@@ -714,7 +715,7 @@ class ContatoEmergencias(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'contato_emergencias'
 
 
@@ -754,7 +755,7 @@ class ControlesAcessos(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'controles_acessos'
 
 
@@ -766,7 +767,7 @@ class Convidados(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'convidados'
 
 
@@ -778,7 +779,7 @@ class Criticidades(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'criticidades'
 
 
@@ -791,7 +792,7 @@ class Departamentos(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'departamentos'
 
 
@@ -812,7 +813,7 @@ class Dispositivos(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'dispositivos'
 
 
@@ -825,7 +826,7 @@ class DispositivosAcessos(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'dispositivos_acessos'
 
 
@@ -849,7 +850,7 @@ class DispositivosCards(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'dispositivos_cards'
 
 
@@ -860,7 +861,7 @@ class DispositivosCardsTipos(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'dispositivos_cards_tipos'
 
 
@@ -871,7 +872,7 @@ class DispositivosEventos(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'dispositivos_eventos'
 
 
@@ -882,7 +883,7 @@ class DispositivosMarcas(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'dispositivos_marcas'
 
 
@@ -900,7 +901,7 @@ class DispositivosModelos(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'dispositivos_modelos'
 
 
@@ -920,7 +921,7 @@ class DispositivosRegistros(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'dispositivos_registros'
 
 
@@ -932,7 +933,7 @@ class DispositivosRoles(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'dispositivos_roles'
 
 
@@ -944,7 +945,7 @@ class DispositivosRolesDispositivosAcessos(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'dispositivos_roles_dispositivos_acessos'
 
 
@@ -955,7 +956,7 @@ class DispositivosTipos(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'dispositivos_tipos'
 
 
@@ -969,8 +970,8 @@ class DjangoAdminLog(models.Model):
     user = models.ForeignKey(AuthUser, models.DO_NOTHING)
 
     class Meta:
-        managed = False
-        db_table = 'django_admin_log'
+        managed = True
+        db_table = 'app_django_admin_log'
 
 
 class DjangoContentType(models.Model):
@@ -978,8 +979,8 @@ class DjangoContentType(models.Model):
     model = models.CharField(max_length=100)
 
     class Meta:
-        managed = False
-        db_table = 'django_content_type'
+        managed = True
+        db_table = 'app_django_content_type'
         unique_together = (('app_label', 'model'),)
 
 
@@ -990,7 +991,7 @@ class DjangoMigrations(models.Model):
     applied = models.DateTimeField()
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'django_migrations'
 
 
@@ -1000,8 +1001,8 @@ class DjangoSession(models.Model):
     expire_date = models.DateTimeField()
 
     class Meta:
-        managed = False
-        db_table = 'django_session'
+        managed = True
+        db_table = 'app_django_session'
 
 
 class Documentos(models.Model):
@@ -1014,7 +1015,7 @@ class Documentos(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'documentos'
 
 
@@ -1040,7 +1041,7 @@ class ElevadorChamados(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'elevador_chamados'
 
 
@@ -1065,7 +1066,7 @@ class Empresas(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'empresas'
 
 
@@ -1077,7 +1078,7 @@ class EmpresasServicos(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'empresas_servicos'
 
 
@@ -1089,7 +1090,7 @@ class EmpresasServicosEmpresas(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'empresas_servicos_empresas'
 
 
@@ -1109,7 +1110,7 @@ class Encomendas(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'encomendas'
 
 
@@ -1122,7 +1123,7 @@ class EntregadoresNormas(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'entregadores_normas'
 
     def __str__(self):
@@ -1136,7 +1137,7 @@ class EstadosEquipamentos(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'estados_equipamentos'
 
 
@@ -1152,7 +1153,7 @@ class Eventos(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'eventos'
 
 
@@ -1166,7 +1167,7 @@ class EventosTratados(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'eventos_tratados'
 
 
@@ -1184,7 +1185,7 @@ class Faturamentos(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'faturamentos'
 
 
@@ -1200,7 +1201,7 @@ class FaturamentosMateriais(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'faturamentos_materiais'
 
 
@@ -1212,7 +1213,7 @@ class FaturamentosOrcamentos(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'faturamentos_orcamentos'
 
 
@@ -1225,7 +1226,7 @@ class Feriados(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'feriados'
 
 
@@ -1243,7 +1244,7 @@ class Ferramentas(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'ferramentas'
 
 
@@ -1260,7 +1261,7 @@ class Fotos(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'fotos'
 
 
@@ -1280,7 +1281,7 @@ class Funcionarios(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'funcionarios'
 
     def __str__(self):
@@ -1294,7 +1295,7 @@ class GruposEventos(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'grupos_eventos'
 
 
@@ -1305,7 +1306,7 @@ class GruposZonas(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'grupos_zonas'
 
 
@@ -1327,7 +1328,7 @@ class HistoricoCondominios(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'historico_condominios'
 
 
@@ -1353,7 +1354,7 @@ class HistoricoPessoas(models.Model):
     created = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'historico_pessoas'
 
 
@@ -1379,7 +1380,7 @@ class Imagemcameras(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'imagemcameras'
 
 
@@ -1400,7 +1401,7 @@ class Informativos(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'informativos'
 
 
@@ -1416,7 +1417,7 @@ class Internets(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'internets'
 
     def __str__(self):
@@ -1431,7 +1432,7 @@ class ItensCadastrados(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'itens_cadastrados'
 
 
@@ -1446,7 +1447,7 @@ class ItensOrcamentos(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'itens_orcamentos'
 
 
@@ -1457,7 +1458,7 @@ class ItensVistorias(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'itens_vistorias'
 
 
@@ -1477,7 +1478,7 @@ class LiberacoesAcessos(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'liberacoes_acessos'
 
 
@@ -1495,7 +1496,7 @@ class LiberacoesChaves(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'liberacoes_chaves'
 
 
@@ -1508,7 +1509,7 @@ class MateriaisAtividades(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'materiais_atividades'
 
 
@@ -1519,7 +1520,7 @@ class MateriaisGrupos(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'materiais_grupos'
 
 
@@ -1531,7 +1532,7 @@ class MateriaisMarcas(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'materiais_marcas'
 
 
@@ -1545,7 +1546,7 @@ class MateriaisObras(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'materiais_obras'
 
 
@@ -1567,7 +1568,7 @@ class MateriaisProdutos(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'materiais_produtos'
 
 
@@ -1578,7 +1579,7 @@ class MateriaisUnidades(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'materiais_unidades'
 
 
@@ -1591,7 +1592,7 @@ class MudancasNormas(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'mudancas_normas'
 
     def __str__(self):
@@ -1609,7 +1610,7 @@ class Notificacoes(models.Model):
     modified = models.DateTimeField()
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'notificacoes'
 
 
@@ -1623,7 +1624,7 @@ class Obras(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'obras'
 
 
@@ -1637,7 +1638,7 @@ class ObrasChecklistObras(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'obras_checklist_obras'
 
 
@@ -1665,7 +1666,7 @@ class Ocorrencias(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'ocorrencias'
 
 
@@ -1689,7 +1690,7 @@ class Orcamentos(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'orcamentos'
 
 
@@ -1705,7 +1706,7 @@ class OrcamentosMateriais(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'orcamentos_materiais'
 
 
@@ -1717,7 +1718,7 @@ class OrcamentosPessoas(models.Model):
     created = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'orcamentos_pessoas'
 
 
@@ -1735,7 +1736,7 @@ class Ordemdeservicos(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'ordemdeservicos'
 
 
@@ -1748,7 +1749,7 @@ class OrdemdeservicosMateriaisProdutos(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'ordemdeservicos_materiais_produtos'
 
 
@@ -1760,7 +1761,7 @@ class Parcelas(models.Model):
     status = models.IntegerField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'parcelas'
 
 
@@ -1781,7 +1782,7 @@ class Patrimonios(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'patrimonios'
 
 
@@ -1796,7 +1797,7 @@ class Pedagios(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'pedagios'
 
 
@@ -1821,7 +1822,7 @@ class PermissaoAcessos(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'permissao_acessos'
 
 
@@ -1833,7 +1834,7 @@ class PermissaoAcessosDispositivosRoles(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'permissao_acessos_dispositivos_roles'
 
 
@@ -1860,7 +1861,7 @@ class Pessoas(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'pessoas'
 
 
@@ -1872,7 +1873,7 @@ class PessoasDispositivosRoles(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'pessoas_dispositivos_roles'
 
 
@@ -1885,7 +1886,7 @@ class Pets(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'pets'
 
 
@@ -1906,7 +1907,7 @@ class Pgms(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'pgms'
 
 
@@ -1918,7 +1919,7 @@ class PlantaoOcorrencias(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'plantao_ocorrencias'
 
 
@@ -1933,7 +1934,7 @@ class PlantaoOperacionals(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'plantao_operacionals'
 
 
@@ -1951,7 +1952,7 @@ class Portas(models.Model):
     status = models.IntegerField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'portas'
 
 
@@ -1964,7 +1965,7 @@ class PrestadoresAcessos(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'prestadores_acessos'
 
 
@@ -1977,7 +1978,7 @@ class PrestadoresNormas(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'prestadores_normas'
 
     def __str__(self):
@@ -2000,7 +2001,7 @@ class Projetos(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'projetos'
 
 
@@ -2016,7 +2017,7 @@ class Qths(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'qths'
 
 
@@ -2029,7 +2030,7 @@ class QthsTarefas(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'qths_tarefas'
 
 
@@ -2042,7 +2043,7 @@ class QthsTarefasQths(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'qths_tarefas_qths'
 
 
@@ -2064,7 +2065,7 @@ class Questionarios(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'questionarios'
 
 
@@ -2076,7 +2077,7 @@ class Racas(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'racas'
 
 
@@ -2094,7 +2095,7 @@ class Recados(models.Model):
     data_fim = models.DateField()
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'recados'
 
 
@@ -2111,7 +2112,7 @@ class ReconhecidoFacials(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'reconhecido_facials'
 
 
@@ -2124,7 +2125,7 @@ class ReservasNormas(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'reservas_normas'
 
     def __str__(self):
@@ -2139,7 +2140,7 @@ class Roles(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'roles'
 
 
@@ -2157,7 +2158,7 @@ class Sindicos(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'sindicos'
 
 
@@ -2170,7 +2171,7 @@ class Subramais(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'subramais'
 
 
@@ -2182,7 +2183,7 @@ class SubtiposOcorrencias(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'subtipos_ocorrencias'
 
 
@@ -2194,7 +2195,7 @@ class SubtiposOcorrenciasOcorrencias(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'subtipos_ocorrencias_ocorrencias'
 
 
@@ -2205,7 +2206,7 @@ class SubtiposTiposAbastecimentos(models.Model):
     status = models.IntegerField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'subtipos_tipos_abastecimentos'
 
     def __str__(self):
@@ -2219,7 +2220,7 @@ class Suporteunidades(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'suporteunidades'
 
     def __str__(self):
@@ -2242,7 +2243,7 @@ class Tarefas(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'tarefas'
 
 
@@ -2280,7 +2281,7 @@ class TatticaFuncionarios(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'tattica_funcionarios'
 
     def __str__(self):
@@ -2301,7 +2302,7 @@ class TatticaTelefones(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'tattica_telefones'
 
 
@@ -2349,7 +2350,7 @@ class TiposAcessos(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'tipos_acessos'
 
 
@@ -2361,7 +2362,7 @@ class TiposClassificacaos(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'tipos_classificacaos'
 
 
@@ -2372,7 +2373,7 @@ class TiposCondominiosFuncionarios(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'tipos_condominios_funcionarios'
 
 
@@ -2388,7 +2389,7 @@ class TiposControlesAcessos(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'tipos_controles_acessos'
 
 
@@ -2399,7 +2400,7 @@ class TiposElevadorChamados(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'tipos_elevador_chamados'
 
 
@@ -2410,7 +2411,7 @@ class TiposEncomendas(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'tipos_encomendas'
 
 
@@ -2421,7 +2422,7 @@ class TiposEquipamentos(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'tipos_equipamentos'
 
 
@@ -2434,7 +2435,7 @@ class TiposEventos(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'tipos_eventos'
 
 
@@ -2445,7 +2446,7 @@ class TiposEventosTratados(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'tipos_eventos_tratados'
 
 
@@ -2456,7 +2457,7 @@ class TiposFotos(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'tipos_fotos'
 
 
@@ -2467,7 +2468,7 @@ class TiposFuncionarios(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'tipos_funcionarios'
 
 
@@ -2480,7 +2481,7 @@ class TiposOcorrencias(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'tipos_ocorrencias'
 
 
@@ -2492,7 +2493,7 @@ class TiposOcorrenciasOcorrencias(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'tipos_ocorrencias_ocorrencias'
 
 
@@ -2503,7 +2504,7 @@ class TiposPagamentos(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'tipos_pagamentos'
 
 
@@ -2514,7 +2515,7 @@ class TiposPatrimonios(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'tipos_patrimonios'
 
 
@@ -2526,7 +2527,7 @@ class TiposPedagios(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'tipos_pedagios'
 
 
@@ -2537,7 +2538,7 @@ class TiposPessoas(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'tipos_pessoas'
 
 
@@ -2548,7 +2549,7 @@ class TiposProjetos(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'tipos_projetos'
 
 
@@ -2559,7 +2560,7 @@ class TiposRacas(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'tipos_racas'
 
 
@@ -2570,7 +2571,7 @@ class TiposSindicos(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'tipos_sindicos'
 
 
@@ -2583,7 +2584,7 @@ class TiposTarefas(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'tipos_tarefas'
 
 
@@ -2594,7 +2595,7 @@ class TiposVeiculos(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'tipos_veiculos'
 
 
@@ -2606,7 +2607,7 @@ class TiposZonas(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'tipos_zonas'
 
 
@@ -2623,7 +2624,7 @@ class Tips(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'tips'
 
 
@@ -2636,7 +2637,7 @@ class TipsTatticaFuncionarios(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'tips_tattica_funcionarios'
 
 
@@ -2647,7 +2648,7 @@ class Unidades(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'unidades'
 
     def __str__(self):
@@ -2680,7 +2681,7 @@ class Users(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'users'
 
 
@@ -2694,7 +2695,7 @@ class Vagas(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'vagas'
 
 
@@ -2710,7 +2711,7 @@ class Veiculos(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'veiculos'
 
     def __str__(self):
@@ -2726,7 +2727,7 @@ class Vistorias(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'vistorias'
 
 
@@ -2740,7 +2741,7 @@ class VistoriasItensVistorias(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'vistorias_itens_vistorias'
 
 
@@ -2767,5 +2768,5 @@ class Zonas(models.Model):
     modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'zonas'
