@@ -34,8 +34,11 @@ def login(request):
 
 
 def index(request):
-    condominios = Condominios.objects.all().order_by('nome_condominio')
-    return render(request, 'index.html', {'condominios': condominios})
+    if request.session.get('user'):
+        condominios = Condominios.objects.all().order_by('nome_condominio')
+        return render(request, 'index.html', {'condominios': condominios})
+
+    return render(request, 'login.html')
 
 def condominio(request):
     return render(request, 'condominio.html')

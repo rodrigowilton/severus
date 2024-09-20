@@ -13,6 +13,13 @@
 </head>
 {% endblock %}
     <style>
+         body {
+            background-image: url("{% static 'img/fundo.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: rgba(242, 242, 242, 0.5); /* Cor de fundo de fallback */
 
         header {
             width: 100%;
@@ -85,6 +92,16 @@
         .padding-top {
             padding-top: 10px; /* ajuste o valor conforme necessário */
         }
+        .btn-sair {
+            border: 2px solid #007bff; /* Cor da moldura azul */
+            color: white; /* Letras brancas */
+            transition: background-color 0.3s, color 0.3s; /* Para uma transição suave */
+        }
+
+        .btn-sair:hover {
+            background-color: red; /* Fundo vermelho ao passar o mouse */
+            color: white; /* Letras brancas no hover */
+        }
     </style>
 <br>
 {% block menu %}
@@ -102,6 +119,7 @@
                             <a class="btn btn-outline-primary white-text" type="button" href="#" name="ocorrencias" data-bs-toggle="modal" data-bs-target="#ocorrenciasModal">Ocorrências</a>
                             <a class="btn btn-outline-primary white-text" type="button" href="#" name="telefones" data-bs-toggle="modal" data-bs-target="#telefonesModal">Telefones</a>
                             <a class="btn btn-outline-primary white-text" type="button" href="#" name="informacoes" data-bs-toggle="modal" data-bs-target="#informacoesModal">Informações</a>
+                            <a class="btn btn-outline-primary white-text" type="button" href="{% url 'logout' %}">Sair</a>
                         </li>
                     </ul>
                 </nav>
@@ -127,6 +145,34 @@
     </div>
 	{% endblock %}
     <!-- Modal -->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="logoutModalLabel">Confirmar Saída</h5>
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+          <span>&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Tem certeza que deseja sair?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" onclick="{% url 'logout' %}">Sair</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function logout() {
+    // Exemplo: Redirecionar para a página de login
+    window.location.href = '/severus/login'; // Ajuste a URL conforme necessário
+  }
+</script>
+
+
 <div class="modal fade" id="adicionarModal" tabindex="-1" role="dialog" aria-labelledby="adicionarModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document"> <!-- Aqui está usando modal-xl para um modal extra grande -->
@@ -150,7 +196,7 @@
                 <h5>Escolha uma das opções abaixo:</h5><br>
 
                 <div class="custom-btn-group">
-                    <button class="btn btn-primary" type="button" onclick="window.location.href='/condominios/new';">Condomínios</button>
+                    <button class="btn btn-primary" type="button" onclick="window.location.href='/app/condominios/new';">Condomínios</button>
                     <button class="btn btn-primary" type="button">Apartamentos</button>
                     <button class="btn btn-primary" type="button">Pessoas</button>
                     <button class="btn btn-primary" type="button">Veículos</button>

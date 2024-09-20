@@ -30,9 +30,15 @@ def login(request):
 	user = User.objects.filter(username=request.POST.get('username')).first()
 
 	if not user or not user.check_password(request.POST.get('password')):
-		return HttpResponse('Usuário ou senha inválidos')
+		return redirect('/severus/login/')
+
+	if user:
+		request.session['user'] = user.id
+		return redirect(f'/app/?id_user={request.session['user']}')
 
 
-	return redirect('/')
+def logout(request):
+	request.session.flush()
+	return redirect('/severus/login')
 
 
