@@ -2,6 +2,7 @@
 {% load static %}
 
 
+
 {% block conteudo %}
   <br>
   <div class="form-group">
@@ -9,8 +10,8 @@
     <input type="text" class="form" placeholder="Buscar condomínio..." id="searchbar" style="margin-left: 20px;"
            onkeyup="search()" name="searchbar">
   </div>
+{{request.user.username}}
   <br>
-
   <table class="table table-striped">
     <thead class="thead-dark">
     <tr>

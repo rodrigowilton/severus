@@ -1,12 +1,11 @@
 # urls.py
 from django.urls import path
-from usuarios import views
 from app import views
 
 
 
 urlpatterns = [
-    path('app/', views.login, name='login'),
+    #path('app/', views.login, name='login'),
     path('', views.index, name='index'),
     path('abastecimentos/new/', views.abastecimento_create, name='abastecimento-create'),
     path('condominios/new/', views.condominio_create, name='condominio-create'),

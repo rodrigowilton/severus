@@ -23,10 +23,10 @@ DEBUG = True
 
 # ALLOWED_HOSTS = ['*']
 
-ALLOWED_HOSTS = ['d6e9-189-50-3-185.ngrok-free.app', '*']
+ALLOWED_HOSTS = ['2992-189-50-3-185.ngrok-free.app', '*']
 
 # Configuração de CSRF
-CSRF_TRUSTED_ORIGINS = ['https://d6e9-189-50-3-185.ngrok-free.app']
+CSRF_TRUSTED_ORIGINS = ['https://2992-189-50-3-185.ngrok-free.app']
 
 
 

@@ -102,6 +102,16 @@
             background-color: red; /* Fundo vermelho ao passar o mouse */
             color: white; /* Letras brancas no hover */
         }
+                .btn-tatticamsn {
+            border: 2px solid #007bff; /* Cor da moldura azul */
+            color: white; /* Letras brancas */
+            transition: background-color 0.3s, color 0.3s; /* Para uma transição suave */
+        }
+
+        .btn-tatticamsn:hover {
+            background-color: red; /* Fundo vermelho ao passar o mouse */
+            color: white; /* Letras brancas no hover */
+        }
     </style>
 <br>
 {% block menu %}
@@ -118,7 +128,8 @@
                             <a class="btn btn-outline-primary white-text" type="button" href="#" name="solicitacoes" data-bs-toggle="modal" data-bs-target="#solicitacoesModal">Solicitações</a>
                             <a class="btn btn-outline-primary white-text" type="button" href="#" name="ocorrencias" data-bs-toggle="modal" data-bs-target="#ocorrenciasModal">Ocorrências</a>
                             <a class="btn btn-outline-primary white-text" type="button" href="#" name="telefones" data-bs-toggle="modal" data-bs-target="#telefonesModal">Telefones</a>
-                            <a class="btn btn-outline-primary white-text" type="button" href="#" name="informacoes" data-bs-toggle="modal" data-bs-target="#informacoesModal">Informações</a>
+                            <a class="btn btn-outline-primary white-text" type="button " href="#" name="informacoes" data-bs-toggle="modal" data-bs-target="#informacoesModal ">Informações</a>
+                            <a class="btn btn-outline-primary white-text" type="button" href="#" name="tatticamsn" data-bs-toggle="modal" data-bs-target="#informacoesModal">Tattica-Msn</a>
                             <a class="btn btn-outline-primary white-text" type="button" href="{% url 'logout' %}">Sair</a>
                         </li>
                     </ul>
