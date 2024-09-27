@@ -1,11 +1,14 @@
+import os
+
 import requests
 import webbrowser
 
+from django.shortcuts import render
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-
+from django.http import StreamingHttpResponse
 from .forms import AbastecimentosForm, CondominiosForm, CondominiosEditForm
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect, redirect
@@ -33,6 +36,13 @@ TiposElevadorChamados, TiposEncomendas, TiposEquipamentos, TiposEventosTratados,
 TiposOcorrenciasOcorrencias, TiposPagamentos, TiposPatrimonios, TiposPedagios, TiposPessoas, TiposProjetos, TiposRacas,
 TiposSindicos, TiposTarefas)
 
+
+def atendimeneto(request):
+    if request.session.get('user'):
+        atendimentos = Atendimentos.objects.all()
+        return render(request, 'atendimento.html', {'atendimentos': atendimentos})
+
+    return render(request, 'login.html')
 
 #@login_required(login_url='login')
 def index(request):
