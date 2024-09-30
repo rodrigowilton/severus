@@ -1,6 +1,23 @@
 from django import forms
-from .models import (Abastecimentos, Veiculos, TiposAbastecimentos, Funcionarios, Internets, Unidades, Suporteunidades,
-					 EntregadoresNormas, PrestadoresNormas, ReservasNormas, MudancasNormas, TatticaFuncionarios, Condominios)
+from .models import *
+
+class AtendimentosForm(forms.ModelForm):
+    class Meta:
+        model = Atendimentos
+        fields = [
+            'condominio',
+            'chamada',
+            'tattica_funcionario',
+            'liberacoes_acesso',
+            'apartamento',
+            'condominios_funcionario',
+            'pessoa',
+            'funcionario',
+            'empresa',
+            'tipo_atendimento',
+            'busca',
+            'acoes',
+        ]
 
 
 class AbastecimentosForm(forms.ModelForm):

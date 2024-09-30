@@ -3,6 +3,10 @@ import os
 import requests
 import webbrowser
 
+from django.views.generic.edit import CreateView
+from django.urls import reverse_lazy
+from .models import Atendimentos
+from .forms import AtendimentosForm
 from django.shortcuts import render
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
@@ -12,38 +16,13 @@ from django.http import StreamingHttpResponse
 from .forms import AbastecimentosForm, CondominiosForm, CondominiosEditForm
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect, redirect
-from app.models import (Apartamentos, Abastecimentos, AberturasPortas, AcessosApp, AgendamentoHorarios,
-Agendamentos, Areas, AreasParalelas, Atendimentos, Atividades, AtividadesMateriaisProdutos, AtividadesOrdemdeservicos,
-AuthGroup, AuthGroupPermissions, AuthPermission, AuthUser, AuthUserGroups, AuthUserUserPermissions, CamFacials,
-CardsElevadors, CentraisJfls, Chamadas, ChavesVirtuais, ChecklistObras, Codigos, ComercialEtapas, ComercialLeadEtapas,
-ComercialLeadProcessos, ComercialLeads, ComercialProcessos, ComercialProspeccao, Comodatos,CondominioEquipamentos,
-Condominios, CondominiosFeriados, CondominiosFuncionarios, CondominiosFuncionariosDispositivosRoles, ConfigFacials,
-ConfigOs, ContatoEmergencias, ControlesAcessos, Convidados, Criticidades, Departamentos, Dispositivos, DispositivosAcessos,
-DispositivosCards, DispositivosCardsTipos, DispositivosEventos, DispositivosMarcas,DispositivosModelos, DispositivosRegistros,
-DispositivosRoles, DispositivosRolesDispositivosAcessos, DispositivosTipos, DjangoAdminLog, DjangoContentType,DjangoMigrations,
-DjangoSession, Documentos, ElevadorChamados, Empresas, EmpresasServicos, EmpresasServicosEmpresas, Encomendas,
-EntregadoresNormas, EstadosEquipamentos, Eventos, EventosTratados,Faturamentos, FaturamentosMateriais,FaturamentosOrcamentos,
-Feriados, Ferramentas, Fotos, Funcionarios, GruposEventos, GruposZonas, HistoricoCondominios, HistoricoPessoas, Imagemcameras,
-Informativos, Internets, ItensCadastrados, ItensOrcamentos, ItensVistorias, LiberacoesAcessos, LiberacoesChaves, MateriaisAtividades,
-MateriaisGrupos, MateriaisMarcas, MateriaisObras, MateriaisProdutos, MateriaisUnidades, MudancasNormas, Notificacoes, Obras,
-ObrasChecklistObras, Ocorrencias, Orcamentos, OrcamentosMateriais, OrcamentosPessoas, Ordemdeservicos, OrdemdeservicosMateriaisProdutos,
-Parcelas, Patrimonios, Pedagios, PermissaoAcessos, PermissaoAcessosDispositivosRoles, Pessoas, PessoasDispositivosRoles, Pets,
-Pgms, PlantaoOcorrencias, PlantaoOperacionals, Portas, PrestadoresAcessos, PrestadoresNormas, Projetos, Qths, QthsTarefas,
-QthsTarefasQths, Questionarios, Racas, Recados, ReconhecidoFacials, ReservasNormas, Roles, Sindicos, Subramais, SubtiposOcorrencias,
-SubtiposOcorrenciasOcorrencias, SubtiposTiposAbastecimentos, Suporteunidades, Tarefas, TatticaFuncionarios, TatticaTelefones,
-TatticaVeiculos, TiposAbastecimentos, TiposAcessos, TiposClassificacaos, TiposCondominiosFuncionarios,TiposControlesAcessos,
-TiposElevadorChamados, TiposEncomendas, TiposEquipamentos, TiposEventosTratados, TiposFotos, TiposFuncionarios, TiposOcorrencias,
-TiposOcorrenciasOcorrencias, TiposPagamentos, TiposPatrimonios, TiposPedagios, TiposPessoas, TiposProjetos, TiposRacas,
-TiposSindicos, TiposTarefas)
+from app.models import *
 
-
-def atendimeneto(request):
-    if request.session.get('user'):
-        atendimentos = Atendimentos.objects.all()
-        return render(request, 'atendimento.html', {'atendimentos': atendimentos})
-
-    return render(request, 'login.html')
-
+class AtendimentosCreateView(CreateView):
+    model = Atendimentos
+    form_class = AtendimentosForm
+    template_name = 'atendimentos_form.html'  # Substitua pelo seu template
+    success_url = reverse_lazy('nome_da_sua_view_de_sucesso')  # Substitua pelo nome da sua URL de sucesso
 #@login_required(login_url='login')
 def index(request):
    if request.session.get('user'):
