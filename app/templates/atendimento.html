@@ -167,11 +167,26 @@
                 <div class="camera">Câmera 3</div>
                 <div class="camera">Câmera 4</div>
             </div>
-            <div style="margin-top: 10px;">
-                <input type="text" id="search" placeholder="Pesquisar...">
-                <button class="search-btn" onclick="performSearch()">Buscar</button>
+            <div style="margin-top: 10px; display: flex; width: 100%;">
+                <input type="text" id="search" placeholder="Pesquisar..." style="flex: 0 0 80%; padding: 10px; border: 1px solid #ccc; border-radius: 5px 0 0 5px;">
+                <button class="search-btn" onclick="performSearch()" style="flex: 0 0 20%; border-radius: 0 5px 5px 0; padding: 10px;">Buscar</button>
             </div>
-            <div id="resultado">Resultado da pesquisa...</div>
+
+            <div class="resultado-container" style="max-height: 200px; overflow-y: auto; margin-top: 10px;">
+                <table id="resultado-table" style="width: 100%; border-collapse: collapse;">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Descrição</th>
+                            <th>Data</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Os resultados da pesquisa serão inseridos aqui -->
+                    </tbody>
+                </table>
+            </div>
         </div>
 
         <div class="col col-contatos">
@@ -270,7 +285,37 @@
     <script>
         function performSearch() {
             const searchTerm = document.getElementById('search').value;
-            document.getElementById('resultado').innerText = `Resultados para: ${searchTerm}`;
+            const resultadoTableBody = document.getElementById('resultado-table').getElementsByTagName('tbody')[0];
+
+            // Limpar resultados anteriores
+            resultadoTableBody.innerHTML = '';
+
+            // Exemplo de dados que poderiam ser retornados pela pesquisa
+            const resultados = [
+                { id: 1, descricao: 'Chamada para manutenção', data: '01/10/2023', status: 'Em andamento' },
+                { id: 2, descricao: 'Chamada para limpeza', data: '02/10/2023', status: 'Concluída' },
+                { id: 3, descricao: 'Chamada para segurança', data: '03/10/2023', status: 'Pendente' }
+            ];
+
+            // Filtrando resultados com base no termo de pesquisa
+            const filteredResults = resultados.filter(result =>
+                result.descricao.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+
+            // Adicionar os resultados filtrados à tabela
+            filteredResults.forEach(result => {
+                const row = resultadoTableBody.insertRow();
+                row.insertCell(0).innerText = result.id;
+                row.insertCell(1).innerText = result.descricao;
+                row.insertCell(2).innerText = result.data;
+                row.insertCell(3).innerText = result.status;
+            });
+
+            if (filteredResults.length === 0) {
+                const row = resultadoTableBody.insertRow();
+                row.insertCell(0).colSpan = 4; // Ocupa todas as colunas
+                row.cells[0].innerText = 'Nenhum resultado encontrado.';
+            }
         }
     </script>
 
