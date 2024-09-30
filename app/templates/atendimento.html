@@ -1,56 +1,279 @@
-<html lang="pt-br">
+{% extends 'base.html' %}
+
+{% load static %}
+<!DOCTYPE html>
+{% block menu %}
+{% endblock %}
+
+{% block titulofixo %}
+    <h1 style="text-align: center; margin-top: 20px;">Atendimento Central</h1>
+    <div>
+        <a href="{% url 'index' %}" style="margin: 300px;">Voltar para o início</a>
+    </div>
+{% endblock %}
+
+<html lang="pt-BR">
+{% block conteudo %}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Atendimento</title>
     <style>
         body {
+            display: flex;
+            flex-direction: column;
+            font-family: Arial, sans-serif;
+            gap: 5px;
+        }
+        .col {
+            padding: 20px;
+            margin: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+        .col-chamadas, .col-contatos {
+            border: 1px solid #ccc;
+            flex: 0 0 20%;
+        }
+        .col-cameras {
+            border: 1px solid #ccc;
+            flex: 1;
+        }
+        .col-apartamentos, .col-servicos {
+            border: 1px solid #ccc;
+            max-height: 300px; /* Altura máxima para o scroll */
+            overflow-y: auto; /* Ativar barra de rolagem vertical */
+        }
+        .cameras {
             display: grid;
-            grid-template-areas:
-                "header header header"
-                "aside main main"
-                "footer footer footer";
-            grid-template-columns: 1fr 4fr 1fr;
-            grid-gap: 5px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 5px;
         }
-
-        .o-header {
-            grid-area: header;
-            background-color: #f0f0f0;
+        .camera {
+            border: 1px solid #999;
+            padding: 10px;
+            text-align: center;
         }
-
-        .o-aside {
-            grid-area: aside;
-            background-color: #e0e0e0;
+        button {
+            margin: 5px;
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            flex: 1 0 30%; /* Flex para 3 colunas */
         }
-
-        .o-main {
-            grid-area: main;
-            background-color: #d0d0d0;
+        button:hover {
+            background-color: #0056b3;
         }
-
-        .o-footer {
-            grid-area: footer;
-            background-color: #c0c0c0;
+        input[type="text"] {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px 0 0 5px;
         }
-
-        canvas {
-            width: 100%; /* Faz o canvas ocupar toda a largura do container */
-            height: auto; /* Mantém a proporção do canvas */
+        button.search-btn {
+            border-radius: 0 5px 5px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .dropdown-container {
+            display: flex;
+            gap: 10px;
+            margin: 10px 0;
+        }
+        .dropdown {
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
         }
     </style>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsempeg/0.2.1/jsempeg.min.js"></script>
 </head>
 
 <body>
-    <header class="o-header">Header</header>
-<aside class="o-aside">
-    {% for camera in cameras %}
-    <h2>{{ camera.name }}</h2>
-    <img src="{% url 'video_feed' %}?camera={{ camera.name }}" width="640" height="480" alt="Câmera {{ camera.name }}">
-    {% endfor %}
-</aside>
-    <main class="o-main">Main</main>
-    <footer class="o-footer">Footer</footer>
+
+    <div style="display: flex;">
+        <div class="col col-chamadas">
+            <h3>Chamadas</h3>
+            <hr>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Descrição</th>
+                        <th>Data</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Chamada para manutenção</td>
+                        <td>01/10/2023</td>
+                        <td>Em andamento</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Chamada para limpeza</td>
+                        <td>02/10/2023</td>
+                        <td>Concluída</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Chamada para segurança</td>
+                        <td>03/10/2023</td>
+                        <td>Pendente</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col col-cameras">
+            <h3>Câmeras</h3>
+            <hr>
+            <div class="dropdown-container">
+                <div>
+                    <label for="condominios"><strong>Condomínios:</strong></label>
+                    <select id="condominios" class="dropdown">
+                        <option value="condominio1">Condomínio 1</option>
+                        <option value="condominio2">Condomínio 2</option>
+                        <option value="condominio3">Condomínio 3</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="cameras"><strong>Câmeras:</strong></label>
+                    <select id="cameras" class="dropdown">
+                        <option value="camera1">Câmera 1</option>
+                        <option value="camera2">Câmera 2</option>
+                        <option value="camera3">Câmera 3</option>
+                        <option value="camera4">Câmera 4</option>
+                    </select>
+                </div>
+            </div>
+            <div class="cameras">
+                <div class="camera">Câmera 1</div>
+                <div class="camera">Câmera 2</div>
+                <div class="camera">Câmera 3</div>
+                <div class="camera">Câmera 4</div>
+            </div>
+            <div style="margin-top: 10px;">
+                <input type="text" id="search" placeholder="Pesquisar...">
+                <button class="search-btn" onclick="performSearch()">Buscar</button>
+            </div>
+            <div id="resultado">Resultado da pesquisa...</div>
+        </div>
+
+        <div class="col col-contatos">
+            <h3>Contatos</h3>
+            <hr>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Telefone</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Contato 1</td>
+                        <td>(11) 98765-4321</td>
+                        <td>contato1@email.com</td>
+                    </tr>
+                    <tr>
+                        <td>Contato 2</td>
+                        <td>(11) 91234-5678</td>
+                        <td>contato2@email.com</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="acoes">
+                <h3>Ações</h3>
+                <button>Ação 1</button>
+                <button>Ação 2</button>
+            </div>
+            <div class="subramais">
+                <h3>Subramais</h3>
+                <button>Subramal 1</button>
+                <button>Subramal 2</button>
+            </div>
+            <div class="col-apartamentos">
+                <h3>Apartamentos</h3>
+                <div style="display: flex; flex-wrap: wrap;">
+                    <button>Apto 101</button>
+                    <button>Apto 102</button>
+                    <button>Apto 103</button>
+                    <button>Apto 201</button>
+                    <button>Apto 202</button>
+                    <button>Apto 203</button>
+                </div>
+            </div>
+            <div class="col-servicos">
+                <h3>Prestadores de Serviço</h3>
+                <hr>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Serviço</th>
+                            <th>Telefone</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Prestador 1</td>
+                            <td>Manutenção</td>
+                            <td>(11) 99876-5432</td>
+                        </tr>
+                        <tr>
+                            <td>Prestador 2</td>
+                            <td>Limpeza</td>
+                            <td>(11) 98765-1234</td>
+                        </tr>
+                        <tr>
+                            <td>Prestador 3</td>
+                            <td>Segurança</td>
+                            <td>(11) 87654-3210</td>
+                        </tr>
+                        <tr>
+                            <td>Prestador 4</td>
+                            <td>Jardinagem</td>
+                            <td>(11) 76543-2109</td>
+                        </tr>
+                        <tr>
+                            <td>Prestador 5</td>
+                            <td>Elétrica</td>
+                            <td>(11) 65432-1098</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="observacao">
+                <h3>Observações do Condomínio</h3>
+                <p>Informações relevantes...</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function performSearch() {
+            const searchTerm = document.getElementById('search').value;
+            document.getElementById('resultado').innerText = `Resultados para: ${searchTerm}`;
+        }
+    </script>
+
 </body>
 </html>
+{% endblock %}
