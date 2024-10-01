@@ -7,8 +7,12 @@
 
 {% block titulofixo %}
     <h1 style="text-align: center; margin-top: 20px;">Atendimento Central</h1>
+    <div>
+        <a href="{% url 'index' %}" style="margin: 300px;">Voltar para o início</a>
+    </div>
     <div class="dropdown-container">
-        <select class="dropdown" id="condominio-dropdown" onchange="updateApartamentos()">
+        <h5>Condomínio</h5>
+        <select class="dropdown" id="condominio-dropdown" onchange="updateCondominioInfo()">
             <option value="">Selecione um condomínio</option>
             {% for condominio in condominios %}
                 <option value="{{ condominio.id }}">{{ condominio.nome_condominio }}</option>
@@ -17,8 +21,12 @@
             {% endfor %}
         </select>
     </div>
-    <div>
-        <a href="{% url 'index' %}" style="margin: 300px;">Voltar para o início</a>
+    <div class="observacao">
+        <h5>Observações do Condomínio</h5>
+        <hr>
+        <div id="normas-condominio" style="max-height: 200px; overflow-y: auto;">
+            <p>Selecione um condomínio para ver as normas.</p>
+        </div>
     </div>
 {% endblock %}
 
@@ -28,93 +36,75 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            font-family: Arial, sans-serif;
-            gap: 5px;
-        }
-        .col {
-            padding: 20px;
-            margin: 5px;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-        }
-        .col-chamadas, .col-contatos {
-            border: 1px solid #ccc;
-            flex: 0 0 20%;
-        }
-        .col-cameras {
-            border: 1px solid #ccc;
-            flex: 1;
-        }
-        .col-apartamentos, .col-servicos {
-            border: 1px solid #ccc;
-            max-height: 300px; /* Altura máxima para o scroll */
-            overflow-y: auto; /* Ativar barra de rolagem vertical */
-        }
-        .observacao {
-            max-height: 200px; /* Altura máxima para a rolagem */
-            overflow-y: auto; /* Ativar barra de rolagem vertical */
-            border: 1px solid #ccc; /* Bordas para visualização */
-            padding: 10px; /* Espaçamento interno */
-        }
-        .cameras {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 5px;
-        }
-        .camera {
-            border: 1px solid #999;
-            padding: 10px;
-            text-align: center;
-        }
-        button {
-            margin: 5px;
-            padding: 10px;
-            background-color: #007BFF;
-            color: white;
+        .btn {
+            padding: 10px 15px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            flex: 1 0 30%; /* Flex para 3 colunas */
-            font-size: 12px;
+            font-size: 14px;
+            margin: 5px; /* Espaço entre os botões */
         }
-        button:hover {
-            background-color: #0056b3;
+
+
+        .btn-primary {
+            background-color: #007BFF; /* Cor do botão primário */
+            color: white;
         }
-        input[type="text"] {
-            flex: 1;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px 0 0 5px;
+
+        .btn-primary:hover {
+            background-color: #0056b3; /* Cor do botão ao passar o mouse */
         }
-        button.search-btn {
-            border-radius: 0 5px 5px 0;
+
+        /* Estilos omitidos para brevidade, mantenha os estilos existentes */
+
+        /* Estilos para o modal */
+        #pessoa-modal {
+            display: none;
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            width: 300px;
         }
         table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 10px;
         }
+
         th, td {
-            border: 1px solid #ccc;
-            padding: 10px;
+            padding: 12px;
             text-align: left;
+            border: 1px solid #ddd;
         }
+
         th {
-            background-color: #f2f2f2;
+            background-color: #007BFF; /* Cor do cabeçalho */
+            color: white;
         }
-        .dropdown-container {
-            display: flex;
-            gap: 10px;
-            margin: 10px 0;
+
+        tbody tr:nth-child(even) {
+            background-color: #f2f2f2; /* Cor de fundo das linhas pares */
         }
-        .dropdown {
-            padding: 5px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            width: 100%;
+
+        tbody tr:hover {
+            background-color: #e0e0e0; /* Cor ao passar o mouse */
         }
+
+        tbody tr td {
+            border-bottom: 1px solid #ddd; /* Linha inferior nas células */
+        }
+
     </style>
 </head>
 
@@ -213,18 +203,19 @@
 
             <div class="acoes">
                 <h5>Ações</h5>
-                <button>PP</button>
-                <button>PH</button>
-                <button>G Subsolo</button>
-                <button>G Cima</button>
+                <button class="btn btn-primary">PP</button>
+                <button class="btn btn-primary">PH</button>
+                <button class="btn btn-primary">G Subsolo</button>
+                <button class="btn btn-primary">G Cima</button>
             </div>
+
             <div class="subramais">
                 <h5>Subramais</h5>
-                <button>91 PP</button>
-                <button>92 PH</button>
-                <button>93 E</button>
-                <button>95 PB</button>
-                <button>100 Zelador (a)</button>
+                <button class="btn btn-primary">91 PP</button>
+                <button class="btn btn-primary">92 PH</button>
+                <button class="btn btn-primary">93 E</button>
+                <button class="btn btn-primary">95 PB</button>
+                <button class="btn btn-primary">100 Zelador (a)</button>
             </div>
             <div class="col-apartamentos">
                 <h5>Apartamentos</h5>
@@ -272,42 +263,91 @@
                     </tbody>
                 </table>
             </div>
-            <div class="observacao">
-                <h5>Observações do Condomínio</h5>
-                <div class="observacao" style="max-height: 200px; overflow-y: auto;">
-                    <p>Informações relevantes...</p>
-                    <p>Mais informações...</p>
-                    <p>Outras observações...</p>
-                </div>
-            </div>
+        </div>
+    </div>
+
+    <!-- Modal para informações do morador -->
+    <div id="pessoa-modal">
+        <div class="modal-content">
+            <h5>Informações do Morador</h5>
+            <div id="modal-content"></div>
+            <button onclick="closeModal()" style="margin-top: 10px;">Fechar</button>
         </div>
     </div>
 
     <script>
-        const apartamentosData = {
+        const condominiosData = {
             {% for condominio in condominios %}
-            {{ condominio.id }}: [
-                {% for apartamento in condominio.apartamentos_set.all %}
-                { "nome": "{{ apartamento.nome_apartamento }}", "id": "{{ apartamento.id }}" },
-                {% endfor %}
-            ],
+            {{ condominio.id }}: {
+                apartamentos: [
+                    {% for apartamento in condominio.apartamentos_set.all %}
+                    {
+                        "nome": "{{ apartamento.nome_apartamento }}",
+                        "id": "{{ apartamento.id }}",
+                        "pessoas": [
+                            {% for pessoa in apartamento.pessoas_set.all %}
+                            {
+                                "nome": "{{ pessoa.nome_pessoa|escapejs }}",
+                                "celular": "{{ pessoa.celular|escapejs }}",
+                                "email": "{{ pessoa.email|escapejs }}"
+                            },
+                            {% endfor %}
+                        ]
+                    },
+                    {% endfor %}
+                ],
+                norma: "{{ condominio.norma_observacao|escapejs }}"
+            },
             {% endfor %}
         };
 
-        function updateApartamentos() {
+        function updateCondominioInfo() {
             const condominioId = document.getElementById('condominio-dropdown').value;
             const apartamentosContainer = document.getElementById('apartamentos-container');
+            const normasContainer = document.getElementById('normas-condominio');
+
             apartamentosContainer.innerHTML = ''; // Limpa os botões existentes
+            normasContainer.innerHTML = ''; // Limpa as normas existentes
 
             if (condominioId) {
-                const apartamentos = apartamentosData[condominioId] || [];
-                apartamentos.forEach(apartamento => {
+                const condominioInfo = condominiosData[condominioId];
+
+                // Atualiza os apartamentos
+                condominioInfo.apartamentos.forEach(apartamento => {
                     const button = document.createElement('button');
                     button.textContent = apartamento.nome;
-                    button.onclick = () => alert('Ação para ' + apartamento.nome); // Defina a ação desejada
+                    button.className = 'btn btn-primary'; // Adiciona a classe de estilo
+                    button.onclick = () => showMoradorInfo(apartamento); // Exibe o modal com informações do morador
                     apartamentosContainer.appendChild(button);
                 });
+
+                // Atualiza as normas
+                normasContainer.innerHTML = `<p>${condominioInfo.norma}</p>`;
+            } else {
+                normasContainer.innerHTML = '<p>Selecione um condomínio para ver as normas.</p>';
             }
+        }
+
+        function showMoradorInfo(apartamento) {
+            const modalContent = document.getElementById('modal-content');
+            modalContent.innerHTML = '';
+
+            if (apartamento.pessoas.length > 0) {
+                apartamento.pessoas.forEach(pessoa => {
+                    const pessoaInfo = `<p><strong>Nome:</strong> ${pessoa.nome}<br>
+                                        <strong>Celular:</strong> ${pessoa.celular}<br>
+                                        <strong>Email:</strong> ${pessoa.email}</p>`;
+                    modalContent.innerHTML += pessoaInfo;
+                });
+            } else {
+                modalContent.innerHTML = '<p>Não há moradores cadastrados para este apartamento.</p>';
+            }
+
+            document.getElementById('pessoa-modal').style.display = 'flex'; // Exibe o modal
+        }
+
+        function closeModal() {
+            document.getElementById('pessoa-modal').style.display = 'none'; // Oculta o modal
         }
 
         function performSearch() {
