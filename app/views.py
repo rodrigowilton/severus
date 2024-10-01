@@ -2,7 +2,7 @@ import os
 
 import requests
 import webbrowser
-
+from .models import Unidades
 from django.shortcuts import render
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
@@ -35,14 +35,17 @@ TatticaVeiculos, TiposAbastecimentos, TiposAcessos, TiposClassificacaos, TiposCo
 TiposElevadorChamados, TiposEncomendas, TiposEquipamentos, TiposEventosTratados, TiposFotos, TiposFuncionarios, TiposOcorrencias,
 TiposOcorrenciasOcorrencias, TiposPagamentos, TiposPatrimonios, TiposPedagios, TiposPessoas, TiposProjetos, TiposRacas,
 TiposSindicos, TiposTarefas)
+from django.http import JsonResponse
 
 
-def atendimeneto(request):
+def atendimento(request):
     if request.session.get('user'):
-        atendimentos = Atendimentos.objects.all()
-        return render(request, 'atendimento.html', {'atendimentos': atendimentos})
+        condominios = Condominios.objects.all()  # Pega todos os condomínios do banco
+
+        return render(request, 'atendimento.html', {'condominios': condominios})
 
     return render(request, 'login.html')
+
 
 #@login_required(login_url='login')
 def index(request):
@@ -57,6 +60,8 @@ def condominio(request):
         return render(request, 'condominio.html')
 
     return render(request, 'login.html')
+
+
 
 def unidades(request):
     if request.session.get('user'):

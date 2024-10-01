@@ -7,6 +7,16 @@
 
 {% block titulofixo %}
     <h1 style="text-align: center; margin-top: 20px;">Atendimento Central</h1>
+    <div class="dropdown-container">
+        <select class="dropdown" id="condominio-dropdown" onchange="updateApartamentos()">
+            <option value="">Selecione um condomínio</option>
+            {% for condominio in condominios %}
+                <option value="{{ condominio.id }}">{{ condominio.nome_condominio }}</option>
+            {% empty %}
+                <option value="">Nenhum condomínio encontrado</option>
+            {% endfor %}
+        </select>
+    </div>
     <div>
         <a href="{% url 'index' %}" style="margin: 300px;">Voltar para o início</a>
     </div>
@@ -109,7 +119,6 @@
 </head>
 
 <body>
-
     <div style="display: flex;">
         <div class="col col-chamadas">
             <h5>Chamadas</h5>
@@ -219,13 +228,8 @@
             </div>
             <div class="col-apartamentos">
                 <h5>Apartamentos</h5>
-                <div style="display: flex; flex-wrap: wrap;">
-                    <button>Apto 101</button>
-                    <button>Apto 102</button>
-                    <button>Apto 103</button>
-                    <button>Apto 201</button>
-                    <button>Apto 202</button>
-                    <button>Apto 203</button>
+                <div id="apartamentos-container" style="display: flex; flex-wrap: wrap;">
+                    <!-- Os botões dos apartamentos aparecerão aqui -->
                 </div>
             </div>
             <div class="col-servicos">
@@ -280,6 +284,32 @@
     </div>
 
     <script>
+        const apartamentosData = {
+            {% for condominio in condominios %}
+            {{ condominio.id }}: [
+                {% for apartamento in condominio.apartamentos_set.all %}
+                { "nome": "{{ apartamento.nome_apartamento }}", "id": "{{ apartamento.id }}" },
+                {% endfor %}
+            ],
+            {% endfor %}
+        };
+
+        function updateApartamentos() {
+            const condominioId = document.getElementById('condominio-dropdown').value;
+            const apartamentosContainer = document.getElementById('apartamentos-container');
+            apartamentosContainer.innerHTML = ''; // Limpa os botões existentes
+
+            if (condominioId) {
+                const apartamentos = apartamentosData[condominioId] || [];
+                apartamentos.forEach(apartamento => {
+                    const button = document.createElement('button');
+                    button.textContent = apartamento.nome;
+                    button.onclick = () => alert('Ação para ' + apartamento.nome); // Defina a ação desejada
+                    apartamentosContainer.appendChild(button);
+                });
+            }
+        }
+
         function performSearch() {
             const searchTerm = document.getElementById('search').value;
             const resultadoTableBody = document.getElementById('resultado-table').getElementsByTagName('tbody')[0];
