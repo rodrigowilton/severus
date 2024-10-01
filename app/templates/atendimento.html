@@ -42,6 +42,12 @@
             max-height: 300px; /* Altura máxima para o scroll */
             overflow-y: auto; /* Ativar barra de rolagem vertical */
         }
+        .observacao {
+            max-height: 200px; /* Altura máxima para a rolagem */
+            overflow-y: auto; /* Ativar barra de rolagem vertical */
+            border: 1px solid #ccc; /* Bordas para visualização */
+            padding: 10px; /* Espaçamento interno */
+        }
         .cameras {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -61,6 +67,7 @@
             border-radius: 5px;
             cursor: pointer;
             flex: 1 0 30%; /* Flex para 3 colunas */
+            font-size: 12px;
         }
         button:hover {
             background-color: #0056b3;
@@ -105,7 +112,7 @@
 
     <div style="display: flex;">
         <div class="col col-chamadas">
-            <h3>Chamadas</h3>
+            <h5>Chamadas</h5>
             <hr>
             <table>
                 <thead>
@@ -140,7 +147,7 @@
         </div>
 
         <div class="col col-cameras">
-            <h3>Câmeras</h3>
+            <h5>Câmeras</h5>
             <hr>
             <div class="dropdown-container">
                 <div>
@@ -190,7 +197,7 @@
         </div>
 
         <div class="col col-contatos">
-            <h3>Contatos</h3>
+            <h5>Contatos</h5>
             <hr>
             <table>
                 <thead>
@@ -215,17 +222,22 @@
             </table>
 
             <div class="acoes">
-                <h3>Ações</h3>
-                <button>Ação 1</button>
-                <button>Ação 2</button>
+                <h5>Ações</h5>
+                <button>PP</button>
+                <button>PH</button>
+                <button>G Subsolo</button>
+                <button>G Cima</button>
             </div>
             <div class="subramais">
-                <h3>Subramais</h3>
-                <button>Subramal 1</button>
-                <button>Subramal 2</button>
+                <h5>Subramais</h5>
+                <button>91 PP</button>
+                <button>92 PH</button>
+                <button>93 E</button>
+                <button>95 PB</button>
+                <button>100 Zelador (a)</button>
             </div>
             <div class="col-apartamentos">
-                <h3>Apartamentos</h3>
+                <h5>Apartamentos</h5>
                 <div style="display: flex; flex-wrap: wrap;">
                     <button>Apto 101</button>
                     <button>Apto 102</button>
@@ -236,7 +248,7 @@
                 </div>
             </div>
             <div class="col-servicos">
-                <h3>Prestadores de Serviço</h3>
+                <h5>Prestadores de Serviço</h5>
                 <hr>
                 <table>
                     <thead>
@@ -276,8 +288,12 @@
                 </table>
             </div>
             <div class="observacao">
-                <h3>Observações do Condomínio</h3>
-                <p>Informações relevantes...</p>
+                <h5>Observações do Condomínio</h5>
+                <div class="observacao" style="max-height: 200px; overflow-y: auto;">
+                    <p>Informações relevantes...</p>
+                    <p>Mais informações...</p>
+                    <p>Outras observações...</p>
+                </div>
             </div>
         </div>
     </div>
