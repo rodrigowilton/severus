@@ -4,209 +4,203 @@
 
 {% block menu %}{% endblock %}
 
-{% block img %}
-
-{% endblock %}
+{% block img %}{% endblock %}
 
 {% block titulofixo %}
     <h1>Consultar Condomínio</h1>
     <div>
         <a href="{% url 'index' %}" style="margin: 300px;">Voltar para o início</a>
-        <a href="{% url 'condominio_list' %}" style="margin: 300px;">lista de condomínios</a>
+        <a href="{% url 'condominio_list' %}" style="margin: 300px;">Lista de condomínios</a>
     </div>
 {% endblock %}
 
 {% block conteudo %}
 <style>
-        body {
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            background-color: rgba(242, 242, 242, 0.5); /* Cor de fundo de fallback */
-        }
+    body {
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+        background-color: rgba(242, 242, 242, 0.5); /* Cor de fundo de fallback */
+    }
 
-        .title-container {
-            width: 100%;
-            text-align: center;
-            margin-top: 20px;
-        }
+    .title-container {
+        width: 100%;
+        text-align: center;
+        margin-top: 20px;
+    }
 
-        .form-container {
-            width: 100%;
-            max-width: 1200px; /* Defina um valor máximo para evitar que o formulário fique muito largo em telas grandes */
-            background-color: rgba(255, 255, 255, 0.8); /* Cor de fundo do formulário com transparência */
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            margin-top: 20px;
-            max-height: 80vh; /* Defina a altura máxima para permitir a rolagem */
-            overflow-y: auto; /* Permite a rolagem vertical */
+    .form-container {
+        width: 100%;
+        max-width: 1200px; /* Defina um valor máximo para evitar que o formulário fique muito largo em telas grandes */
+        background-color: rgba(255, 255, 255, 0.8); /* Cor de fundo do formulário com transparência */
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin-top: 20px;
+        max-height: 80vh; /* Defina a altura máxima para permitir a rolagem */
+        overflow-y: auto; /* Permite a rolagem vertical */
+    }
 
-        }
+    .form-container form {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Distribui os campos em colunas automáticas responsivas */
+        gap: 15px;
+        align-items: start;
+        padding: 10px;
+    }
 
-        .form-container form {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Distribui os campos em colunas automáticas responsivas */
-            gap: 15px;
-            align-items: start;
-            padding: 10px;
-        }
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        padding: 10px;
+    }
 
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            padding: 10px;
-        }
+    .form-group label {
+        margin-bottom: 5px;
+    }
 
-        .form-group label {
-            margin-bottom: 5px;
-        }
+    .form-group input, .form-group select {
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
 
-        .form-group input, .form-group select {
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
+    .form-actions {
+        grid-column: span 2;
+        display: flex;
+        justify-content: flex-end;
+    }
 
-        .form-actions {
-            grid-column: span 2;
-            display: flex;
-            justify-content: flex-end;
-        }
-
-        .form-actions button {
-            padding: 10px 20px;
-            border: none;
-            background-color: #28a745;
-            color: #fff;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-    </style>
+    .form-actions button {
+        padding: 10px 20px;
+        border: none;
+        background-color: #28a745;
+        color: #fff;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+</style>
 <br>
-    <div class="title-container">
-    </div>
-    <div class="form-container">
-        <h3>Preencha os campos:</h3>
-        <form method="POST">
-            {% csrf_token %}
-            <div class="form-group">
-                <label for="internet"><b>Internet</b></label>
-                {{ condominio.internet }}
-            </div>
-            <div class="form-group">
-                <label for="unidade"><b>Tipo de Unidade</b></label>
-                {{ condominio.unidade }}
-            </div>
-            <div class="form-group">
-                <label for="suporteunidade"><b>Suporte Unidade</b></label>
-                {{ condominio.suporteunidade }}
-            </div>
-            <div class="form-group">
-                <label for="entregadores_norma"><b>Data do Entregadores Norma</b></label>
-                {{ condominio.entregadores_norma }}
-            </div>
-            <div class="form-group">
-                <label for="prestadores_norma"><b>Prestadores Norma</b></label>
-                {{ condominio.prestadores_norma }}
-            </div>
-            <div class="form-group">
-                <label for="reservas_norma"><b>Reservas Norma</b></label>
-                {{ condominio.reservas_norma }}
-            </div>
-            <div class="form-group">
-                <label for="mudancas_norma"><b>Mudanças Norma</b></label>
-                {{ condominio.mudancas_norma }}
-            </div>
-            <div class="form-group">
-                <label for="responsavel_tattica"><b>Responsável Tattica</b></label>
-                {{ condominio.responsavel_tattica }}
-            </div>
-            <div class="form-group">
-                <label for="norma_observacao"><b>Norma Observação</b></label>
-                {{ condominio.norma_observacao }}
-            </div>
-            <div class="form-group">
-                <label for="nome_condominio"><b>Nome Condomínio</b></label>
-                {{ condominio.nome_condominio }}
-            </div>
-            <div class="form-group">
-                <label for="data_condominio"><b>Data Condomínio</b></label>
-                {{ condominio.data_condominio }}
-            </div>
-            <div class="form-group">
-                <label for="dias_implantacao"><b>Dias Implantação</b></label>
-                {{ condominio.dias_implantacao }}
-            </div>
-            <div class="form-group">
-                <label for="ramal_condominio"><b>Ramal Condomínio</b></label>
-                {{ condominio.ramal_condominio }}
-            </div>
-            <div class="form-group">
-                <label for="ramal_interno"><b>Ramal Interno</b></label>
-                {{ condominio.ramal_interno }}
-            </div>
-            <div class="form-group">
-                <label for="telefone"><b>Telefone</b></label>
-                {{ condominio.telefone }}
-            </div>
-            <div class="form-group">
-                <label for="cnpj"><b>Cnpj</b></label>
-                {{ condominio.cnpj }}
-            </div>
-            <div class="form-group">
-                <label for="cep"><b>Cep</b></label>
-                {{ condominio.cep }}
-            </div>
-            <div class="form-group">
-                <label for="numero"><b>Número</b></label>
-                {{ condominio.numero }}
+<div class="title-container"></div>
+<div class="form-container">
+    <h3>Preencha os campos:</h3>
+    <form method="POST" class="table table-bordered"> <!-- Adicionando a classe table-bordered -->
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="internet"><b>Internet</b></label>
+            {{ condominio.internet }}
+        </div>
+        <div class="form-group">
+            <label for="unidade"><b>Tipo de Unidade</b></label>
+            {{ condominio.unidade }}
+        </div>
+        <div class="form-group">
+            <label for="suporteunidade"><b>Suporte Unidade</b></label>
+            {{ condominio.suporteunidade }}
+        </div>
+        <div class="form-group">
+            <label for="entregadores_norma"><b>Data do Entregadores Norma</b></label>
+            {{ condominio.entregadores_norma }}
+        </div>
+        <div class="form-group">
+            <label for="prestadores_norma"><b>Prestadores Norma</b></label>
+            {{ condominio.prestadores_norma }}
+        </div>
+        <div class="form-group">
+            <label for="reservas_norma"><b>Reservas Norma</b></label>
+            {{ condominio.reservas_norma }}
+        </div>
+        <div class="form-group">
+            <label for="mudancas_norma"><b>Mudanças Norma</b></label>
+            {{ condominio.mudancas_norma }}
+        </div>
+        <div class="form-group">
+            <label for="responsavel_tattica"><b>Responsável Tattica</b></label>
+            {{ condominio.responsavel_tattica }}
+        </div>
+        <div class="form-group">
+            <label for="norma_observacao"><b>Norma Observação</b></label>
+            {{ condominio.norma_observacao }}
+        </div>
+        <div class="form-group">
+            <label for="nome_condominio"><b>Nome Condomínio</b></label>
+            {{ condominio.nome_condominio }}
+        </div>
+        <div class="form-group">
+            <label for="data_condominio"><b>Data Condomínio</b></label>
+            {{ condominio.data_condominio }}
+        </div>
+        <div class="form-group">
+            <label for="dias_implantacao"><b>Dias Implantação</b></label>
+            {{ condominio.dias_implantacao }}
+        </div>
+        <div class="form-group">
+            <label for="ramal_condominio"><b>Ramal Condomínio</b></label>
+            {{ condominio.ramal_condominio }}
+        </div>
+        <div class="form-group">
+            <label for="ramal_interno"><b>Ramal Interno</b></label>
+            {{ condominio.ramal_interno }}
+        </div>
+        <div class="form-group">
+            <label for="telefone"><b>Telefone</b></label>
+            {{ condominio.telefone }}
+        </div>
+        <div class="form-group">
+            <label for="cnpj"><b>Cnpj</b></label>
+            {{ condominio.cnpj }}
+        </div>
+        <div class="form-group">
+            <label for="cep"><b>Cep</b></label>
+            {{ condominio.cep }}
+        </div>
+        <div class="form-group">
+            <label for="numero"><b>Número</b></label>
+            {{ condominio.numero }}
 
-                <label for="logradouro"><b>Logradouro</b></label>
-                {{ condominio.logradouro }}
-            </div>
-            <div class="form-group">
-                <label for="complemento"><b>Complemento</b></label>
-                {{ condominio.complemento }}
+            <label for="logradouro"><b>Logradouro</b></label>
+            {{ condominio.logradouro }}
+        </div>
+        <div class="form-group">
+            <label for="complemento"><b>Complemento</b></label>
+            {{ condominio.complemento }}
 
-                <label for="bairro"><b>Bairro</b></label>
-                {{ condominio.bairro }}
-            </div>
-            <div class="form-group">
-                <label for="cidade"><b>Cidade</b></label>
-                {{ condominio.cidade }}
-            </div>
-            <div class="form-group">
-                <label for="uf"><b>Uf</b></label>
-                {{ condominio.uf }}
-            </div>
-            <div class="form-group">
-                <label for="website"><b>Website</b></label>
-                {{ condominio.website }}
-            </div>
-            <div class="form-group">
-                <label for="website_agendamento"><b>Website Agendamento</b></label>
-                {{ condominio.website_agendamento }}
-            </div>
-            <div class="form-group">
-                <label for="responsavel_tattica"><b>Responsavel Tattica</b></label>
-                {{ condominio.responsavel_tattica }}
-            </div>
-            <div class="form-group">
-                <label for="financeiro_email"><b>Email</b></label>
-                {{ condominio.financeiro_email }}
-            </div>
-            <div class="form-group">
-                <label for="status"><b>Status</b></label>
-                 {{ condominio.status }}
-            </div>
-
-        </form>
-
-    </div>
+            <label for="bairro"><b>Bairro</b></label>
+            {{ condominio.bairro }}
+        </div>
+        <div class="form-group">
+            <label for="cidade"><b>Cidade</b></label>
+            {{ condominio.cidade }}
+        </div>
+        <div class="form-group">
+            <label for="uf"><b>Uf</b></label>
+            {{ condominio.uf }}
+        </div>
+        <div class="form-group">
+            <label for="website"><b>Website</b></label>
+            {{ condominio.website }}
+        </div>
+        <div class="form-group">
+            <label for="website_agendamento"><b>Website Agendamento</b></label>
+            {{ condominio.website_agendamento }}
+        </div>
+        <div class="form-group">
+            <label for="responsavel_tattica"><b>Responsável Tattica</b></label>
+            {{ condominio.responsavel_tattica }}
+        </div>
+        <div class="form-group">
+            <label for="financeiro_email"><b>Email</b></label>
+            {{ condominio.financeiro_email }}
+        </div>
+        <div class="form-group">
+            <label for="status"><b>Status</b></label>
+            {{ condominio.status }}
+        </div>
+    </form>
+</div>
 <br>
 {% endblock %}

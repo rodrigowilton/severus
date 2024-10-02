@@ -94,6 +94,7 @@
                             <th>Nome</th>
                             <th>Apartamento</th>
                             <th>Telefone</th>
+                            <th>Email</th>
                         </tr>
                     </thead>
                     <tbody id="resultado-body">
@@ -111,7 +112,7 @@
                     <tr>
                         <th>Nome</th>
                         <th>Telefone</th>
-                        <th>Parentesco</th> <!-- Coluna para parentesco -->
+                        <th>Email</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -174,7 +175,7 @@
                             {
                                 "nome": "{{ pessoa.nome_pessoa|escapejs }}",
                                 "celular": "{{ pessoa.celular|escapejs }}",
-                                "parentesco": "{{ pessoa.parentesco|escapejs }}" // Buscando o parentesco
+                                "email": "{{ pessoa.email|escapejs }}"
                             },
                             {% endfor %}
                         ]
@@ -218,6 +219,7 @@
             }
         }
 
+
         function showMoradorInfo(apartamento) {
             const contatosTableBody = document.getElementById('contatos-table').getElementsByTagName('tbody')[0];
             contatosTableBody.innerHTML = ''; // Limpa os contatos anteriores
@@ -227,7 +229,7 @@
                     const row = contatosTableBody.insertRow();
                     row.insertCell(0).innerText = pessoa.nome;
                     row.insertCell(1).innerText = pessoa.celular;
-                    row.insertCell(2).innerText = pessoa.parentesco; // Adicionando a célula de parentesco
+                    row.insertCell(2).innerText = pessoa.email;
                 });
             } else {
                 const row = contatosTableBody.insertRow();
@@ -252,6 +254,7 @@
                     })).filter(pessoa => {
                         return pessoa.nome.toLowerCase().includes(searchTerm) ||
                                pessoa.celular.toLowerCase().includes(searchTerm) ||
+                               pessoa.email.toLowerCase().includes(searchTerm) ||
                                apartamento.nome.toLowerCase().includes(searchTerm);
                     });
                 });
@@ -262,11 +265,12 @@
                     row.insertCell(0).innerText = pessoa.nome;
                     row.insertCell(1).innerText = pessoa.apartamento;
                     row.insertCell(2).innerText = pessoa.celular;
+                    row.insertCell(3).innerText = pessoa.email;
                 });
 
                 if (moradoresFiltrados.length === 0) {
                     const row = resultadoBody.insertRow();
-                    row.insertCell(0).colSpan = 3; // Ocupa todas as colunas
+                    row.insertCell(0).colSpan = 4; // Ocupa todas as colunas
                     row.cells[0].innerText = 'Nenhum morador encontrado.';
                 }
             }
