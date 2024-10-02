@@ -20,13 +20,36 @@
     </select>
 </div>
 <br><br>
-<div class="observacao" style="max-width: 80%; margin: 0 auto;">
-    <h5>Observações do Condomínio</h5>
-    <hr>
-    <div id="normas-condominio" style="max-height: 200px; overflow-y: auto;">
-        <p>Selecione um condomínio para ver as normas.</p>
+<div style="display: flex; justify-content: space-around; max-width: 80%; margin: 0 auto;">
+    <div class="observacao" style="flex: 1; margin-right: 20px;">
+        <h5>Observações do Condomínio</h5>
+        <hr>
+        <div id="normas-condominio" style="max-height: 200px; overflow-y: auto;">
+            <ul id="normas-list">
+                <li>Selecione um condomínio para ver as normas.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="col col-contatos" style="flex: 1;">
+        <h5>Contatos</h5>
+        <hr>
+        <table id="contatos-table">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Telefone</th>
+                    <th>Parentesco</th> <!-- Coluna para parentesco -->
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Os contatos serão inseridos aqui -->
+            </tbody>
+        </table>
     </div>
 </div>
+
+    <br><br>
 {% endblock %}
 
 <html lang="pt-BR">
@@ -94,7 +117,6 @@
                             <th>Nome</th>
                             <th>Apartamento</th>
                             <th>Telefone</th>
-                            <th>Email</th>
                         </tr>
                     </thead>
                     <tbody id="resultado-body">
@@ -105,22 +127,7 @@
         </div>
 
         <div class="col col-contatos">
-            <h5>Contatos</h5>
-            <hr>
-            <table id="contatos-table">
-                <thead>
-                    <tr>
-                        <th>Nome</th>
-                        <th>Telefone</th>
-                        <th>Email</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Os contatos serão inseridos aqui -->
-                </tbody>
-            </table>
-
-            <div class="acoes">
+             <div class="acoes">
                 <h5>Ações</h5>
                 <button class="btn btn-primary">PP</button>
                 <button class="btn btn-primary">PH</button>
@@ -175,7 +182,7 @@
                             {
                                 "nome": "{{ pessoa.nome_pessoa|escapejs }}",
                                 "celular": "{{ pessoa.celular|escapejs }}",
-                                "email": "{{ pessoa.email|escapejs }}"
+                                "parentesco": "{{ pessoa.parentesco|escapejs }}" // Buscando o parentesco
                             },
                             {% endfor %}
                         ]
@@ -219,7 +226,6 @@
             }
         }
 
-
         function showMoradorInfo(apartamento) {
             const contatosTableBody = document.getElementById('contatos-table').getElementsByTagName('tbody')[0];
             contatosTableBody.innerHTML = ''; // Limpa os contatos anteriores
@@ -229,7 +235,7 @@
                     const row = contatosTableBody.insertRow();
                     row.insertCell(0).innerText = pessoa.nome;
                     row.insertCell(1).innerText = pessoa.celular;
-                    row.insertCell(2).innerText = pessoa.email;
+                    row.insertCell(2).innerText = pessoa.parentesco; // Adicionando a célula de parentesco
                 });
             } else {
                 const row = contatosTableBody.insertRow();
@@ -254,7 +260,6 @@
                     })).filter(pessoa => {
                         return pessoa.nome.toLowerCase().includes(searchTerm) ||
                                pessoa.celular.toLowerCase().includes(searchTerm) ||
-                               pessoa.email.toLowerCase().includes(searchTerm) ||
                                apartamento.nome.toLowerCase().includes(searchTerm);
                     });
                 });
@@ -265,12 +270,11 @@
                     row.insertCell(0).innerText = pessoa.nome;
                     row.insertCell(1).innerText = pessoa.apartamento;
                     row.insertCell(2).innerText = pessoa.celular;
-                    row.insertCell(3).innerText = pessoa.email;
                 });
 
                 if (moradoresFiltrados.length === 0) {
                     const row = resultadoBody.insertRow();
-                    row.insertCell(0).colSpan = 4; // Ocupa todas as colunas
+                    row.insertCell(0).colSpan = 3; // Ocupa todas as colunas
                     row.cells[0].innerText = 'Nenhum morador encontrado.';
                 }
             }

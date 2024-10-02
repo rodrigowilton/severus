@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
+<!DOCTYPE html %}
 {% block menu %}{% endblock %}
 
 {% block titulofixo %}
@@ -20,13 +20,36 @@
     </select>
 </div>
 <br><br>
-<div class="observacao" style="max-width: 80%; margin: 0 auto;">
-    <h5>Observações do Condomínio</h5>
-    <hr>
-    <div id="normas-condominio" style="max-height: 200px; overflow-y: auto;">
-        <p>Selecione um condomínio para ver as normas.</p>
+<div style="display: flex; justify-content: space-around; max-width: 80%; margin: 0 auto;">
+    <div class="observacao" style="flex: 1; margin-right: 20px;">
+        <h5>Observações do Condomínio</h5>
+        <hr>
+        <div id="normas-condominio" style="max-height: 200px; overflow-y: auto;">
+            <ul id="normas-list">
+                <li>Selecione um condomínio para ver as normas.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="col col-contatos" style="flex: 1;">
+        <h5>Contatos</h5>
+        <hr>
+        <table id="contatos-table" style="width: 100%; border-collapse: separate; border-spacing: 10px; border: 1px solid #ccc;">
+            <thead>
+                <tr style="background-color: #d0d0d0;">
+                    <th style="border: 1px solid #ccc; padding: 8px;">Nome</th>
+                    <th style="border: 1px solid #ccc; padding: 8px;">Telefone</th>
+                    <th style="border: 1px solid #ccc; padding: 8px;">Parentesco</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Os contatos serão preenchidos aqui -->
+            </tbody>
+        </table>
     </div>
 </div>
+
+<br><br>
 {% endblock %}
 
 <html lang="pt-BR">
@@ -49,7 +72,6 @@
             background-color: #f9f9f9;
             box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
         }
-        /* Estilos existentes */
     </style>
 </head>
 
@@ -104,22 +126,7 @@
         </div>
 
         <div class="col col-contatos">
-            <h5>Contatos</h5>
-            <hr>
-            <table id="contatos-table">
-                <thead>
-                    <tr>
-                        <th>Nome</th>
-                        <th>Telefone</th>
-                        <th>Parentesco</th> <!-- Coluna para parentesco -->
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Os contatos serão inseridos aqui -->
-                </tbody>
-            </table>
-
-            <div class="acoes">
+             <div class="acoes">
                 <h5>Ações</h5>
                 <button class="btn btn-primary">PP</button>
                 <button class="btn btn-primary">PH</button>
@@ -174,7 +181,7 @@
                             {
                                 "nome": "{{ pessoa.nome_pessoa|escapejs }}",
                                 "celular": "{{ pessoa.celular|escapejs }}",
-                                "parentesco": "{{ pessoa.parentesco|escapejs }}" // Buscando o parentesco
+                                "parentesco": "{{ pessoa.parentesco|escapejs }}"
                             },
                             {% endfor %}
                         ]
@@ -223,11 +230,40 @@
             contatosTableBody.innerHTML = ''; // Limpa os contatos anteriores
 
             if (apartamento.pessoas.length > 0) {
+                // Agrupa pessoas por parentesco
+                const contatosAgrupados = {};
+
                 apartamento.pessoas.forEach(pessoa => {
-                    const row = contatosTableBody.insertRow();
-                    row.insertCell(0).innerText = pessoa.nome;
-                    row.insertCell(1).innerText = pessoa.celular;
-                    row.insertCell(2).innerText = pessoa.parentesco; // Adicionando a célula de parentesco
+                    const parentesco = pessoa.parentesco || "Outros"; // Define um grupo para parentesco desconhecido
+                    if (!contatosAgrupados[parentesco]) {
+                        contatosAgrupados[parentesco] = [];
+                    }
+                    contatosAgrupados[parentesco].push(pessoa);
+                });
+
+                // Ordena os grupos de parentesco
+                const parentescosOrdenados = Object.keys(contatosAgrupados).sort();
+
+                // Adiciona cada grupo à tabela
+                parentescosOrdenados.forEach(parentesco => {
+                    const grupo = contatosAgrupados[parentesco];
+
+                    // Adiciona uma linha de título para o parentesco
+                    const headerRow = contatosTableBody.insertRow();
+                    const headerCell = headerRow.insertCell(0);
+                    headerCell.colSpan = 3; // Ocupa todas as colunas
+                    headerCell.innerText = parentesco; // Título do parentesco
+                    headerCell.style.fontWeight = 'bold'; // Negrito para o título
+                    headerCell.style.backgroundColor = '#d0d0d0'; // Cor de fundo para o título
+                    headerCell.style.textAlign = 'center'; // Centraliza o texto
+
+                    // Adiciona as pessoas desse parentesco
+                    grupo.forEach(pessoa => {
+                        const row = contatosTableBody.insertRow();
+                        row.insertCell(0).innerText = pessoa.nome;
+                        row.insertCell(1).innerText = pessoa.celular;
+                        row.insertCell(2).innerText = pessoa.parentesco;
+                    });
                 });
             } else {
                 const row = contatosTableBody.insertRow();
