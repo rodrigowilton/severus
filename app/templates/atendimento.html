@@ -26,7 +26,27 @@
         <h5>Observações do Condomínio</h5>
         <hr>
         <div id="normas-condominio" style="max-height: 200px; overflow-y: auto;">
-            <p>Selecione um condomínio para ver as normas.</p>
+            <ul id="normas-list">
+                <li>Selecione um condomínio para ver as normas.</li>
+            </ul>
+        </div>
+
+        <div style="margin-top: 20px;">
+            <input type="text" id="search" placeholder="Pesquisar..." style="width: 80%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;" oninput="performSearch()">
+            <div class="resultado-container" style="max-height: 200px; overflow-y: auto; margin-top: 10px;">
+                <table id="resultado-table" style="width: 100%; border-collapse: collapse;">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Apartamento</th>
+                            <th>Telefone</th>
+                        </tr>
+                    </thead>
+                    <tbody id="resultado-body">
+                        <!-- Resultados da pesquisa aqui -->
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 
@@ -64,27 +84,6 @@
                 <!-- Os contatos serão preenchidos aqui -->
             </tbody>
         </table>
-    </div>
-</div>
-
-<div style="margin-top: 20px; display: flex; justify-content: center;">
-    <div style="width: 50%;">
-        <input type="text" id="search" placeholder="Pesquisar..." style="width: 80%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
-        <button class="btn btn-primary" onclick="performSearch()" style="padding: 10px;">Buscar</button>
-        <div class="resultado-container" style="max-height: 200px; overflow-y: auto; margin-top: 10px;">
-            <table id="resultado-table" style="width: 100%; border-collapse: collapse;">
-                <thead>
-                    <tr>
-                        <th>Nome</th>
-                        <th>Apartamento</th>
-                        <th>Telefone</th>
-                    </tr>
-                </thead>
-                <tbody id="resultado-body">
-                    <!-- Resultados da pesquisa aqui -->
-                </tbody>
-            </table>
-        </div>
     </div>
 </div>
 
@@ -182,13 +181,13 @@
         function updateCondominioInfo() {
             currentCondominioId = document.getElementById('condominio-dropdown').value;
             const apartamentosContainer = document.getElementById('apartamentos-container');
-            const normasContainer = document.getElementById('normas-condominio');
+            const normasList = document.getElementById('normas-list');
             const contatosTableBody = document.getElementById('contatos-table').getElementsByTagName('tbody')[0];
             const searchInput = document.getElementById('search');
             const resultadosBody = document.getElementById('resultado-body');
 
             apartamentosContainer.innerHTML = ''; // Limpa os botões existentes
-            normasContainer.innerHTML = ''; // Limpa as normas existentes
+            normasList.innerHTML = ''; // Limpa a lista de normas
             contatosTableBody.innerHTML = ''; // Limpa contatos
             searchInput.value = ''; // Limpa o campo de pesquisa
             resultadosBody.innerHTML = ''; // Limpa os resultados da pesquisa
@@ -206,13 +205,17 @@
                     apartamentosContainer.appendChild(button);
                 });
 
-                // Atualiza as normas
-                normasContainer.innerHTML = `<p>${condominioInfo.norma}</p>`;
-
-                // Mostra os apartamentos
-                showApartamentos();
+                // Atualiza as normas como lista, separando por ponto
+                const normas = condominioInfo.norma.split('.'); // Divide em partes usando o ponto como separador
+                normas.forEach(norm => {
+                    const li = document.createElement('li');
+                    li.textContent = norm.trim(); // Remove espaços em branco
+                    if (norm.trim()) { // Adiciona apenas se não for vazio
+                        normasList.appendChild(li);
+                    }
+                });
             } else {
-                normasContainer.innerHTML = '<p>Selecione um condomínio para ver as normas.</p>';
+                normasList.innerHTML = '<li>Selecione um condomínio para ver as normas.</li>';
             }
         }
 
@@ -237,27 +240,36 @@
         }
 
         function performSearch() {
-            const searchTerm = document.getElementById('search').value.toLowerCase();
+            const searchValue = document.getElementById('search').value.toLowerCase();
             const resultadosBody = document.getElementById('resultado-body');
-            resultadosBody.innerHTML = ''; // Limpa resultados anteriores
 
+            // Limpa os resultados anteriores
+            resultadosBody.innerHTML = '';
+
+            // Lógica de pesquisa
             if (currentCondominioId) {
                 const condominioInfo = condominiosData[currentCondominioId];
+                const resultados = condominioInfo.apartamentos.flatMap(apartamento =>
+                    apartamento.pessoas.filter(pessoa =>
+                        pessoa.nome.toLowerCase().includes(searchValue || '')
+                    ).map(pessoa => ({
+                        nome: pessoa.nome,
+                        apartamento: apartamento.nome,
+                        celular: pessoa.celular
+                    }))
+                );
 
-                condominioInfo.apartamentos.forEach(apartamento => {
-                    apartamento.pessoas.forEach(pessoa => {
-                        if (pessoa.nome.toLowerCase().includes(searchTerm) ||
-                            pessoa.celular.includes(searchTerm)) {
-                            const row = resultadosBody.insertRow();
-                            row.insertCell(0).textContent = pessoa.nome;
-                            row.insertCell(1).textContent = apartamento.nome;
-                            row.insertCell(2).textContent = pessoa.celular;
-                        }
-                    });
+                // Preenche os resultados da pesquisa
+                resultados.forEach(result => {
+                    const row = resultadosBody.insertRow();
+                    row.insertCell(0).textContent = result.nome;
+                    row.insertCell(1).textContent = result.apartamento;
+                    row.insertCell(2).textContent = result.celular;
                 });
             }
         }
     </script>
 </body>
-</html>
 {% endblock %}
+
+</html>
