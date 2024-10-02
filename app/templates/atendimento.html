@@ -49,6 +49,43 @@
     </div>
 </div>
 
+<br>
+
+<!-- Seção de Câmeras -->
+<div style="margin-top: 20px;">
+
+        <div class="col col-cameras">
+            <hr>
+            <div style="margin-top: 10px; display: flex; width: 100%;">
+                <input type="text" id="search" placeholder="Pesquisar..." style="flex: 0 0 80%; padding: 10px; border: 1px solid #ccc; border-radius: 5px 0 0 5px;">
+                <button class="btn btn-primary" onclick="performSearch()" style="flex: 0 0 20%; border-radius: 0 5px 5px 0; padding: 10px;">Buscar</button>
+            </div>
+
+            <div class="resultado-container" style="max-height: 200px; overflow-y: auto; margin-top: 10px;">
+                <table id="resultado-table" style="width: 100%; border-collapse: collapse;">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Apartamento</th>
+                            <th>Telefone</th>
+                        </tr>
+                    </thead>
+                    <tbody id="resultado-body">
+                        <!-- Resultados da pesquisa aqui -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    <h5>Câmeras</h5>
+    <hr>
+    <div class="cameras">
+        <div class="camera">Câmera 1</div>
+        <div class="camera">Câmera 2</div>
+        <div class="camera">Câmera 3</div>
+        <div class="camera">Câmera 4</div>
+    </div>
+</div>
+
 <br><br>
 {% endblock %}
 
@@ -95,35 +132,6 @@
             </table>
         </div>
 
-        <div class="col col-cameras">
-            <h5>Câmeras</h5>
-            <hr>
-            <div class="cameras">
-                <div class="camera">Câmera 1</div>
-                <div class="camera">Câmera 2</div>
-                <div class="camera">Câmera 3</div>
-                <div class="camera">Câmera 4</div>
-            </div>
-            <div style="margin-top: 10px; display: flex; width: 100%;">
-                <input type="text" id="search" placeholder="Pesquisar..." style="flex: 0 0 80%; padding: 10px; border: 1px solid #ccc; border-radius: 5px 0 0 5px;">
-                <button class="btn btn-primary" onclick="performSearch()" style="flex: 0 0 20%; border-radius: 0 5px 5px 0; padding: 10px;">Buscar</button>
-            </div>
-
-            <div class="resultado-container" style="max-height: 200px; overflow-y: auto; margin-top: 10px;">
-                <table id="resultado-table" style="width: 100%; border-collapse: collapse;">
-                    <thead>
-                        <tr>
-                            <th>Nome</th>
-                            <th>Apartamento</th>
-                            <th>Telefone</th>
-                        </tr>
-                    </thead>
-                    <tbody id="resultado-body">
-                        <!-- Resultados da pesquisa aqui -->
-                    </tbody>
-                </table>
-            </div>
-        </div>
 
         <div class="col col-contatos">
              <div class="acoes">
