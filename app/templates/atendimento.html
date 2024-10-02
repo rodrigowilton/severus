@@ -184,10 +184,14 @@
             const apartamentosContainer = document.getElementById('apartamentos-container');
             const normasContainer = document.getElementById('normas-condominio');
             const contatosTableBody = document.getElementById('contatos-table').getElementsByTagName('tbody')[0];
+            const searchInput = document.getElementById('search');
+            const resultadosBody = document.getElementById('resultado-body');
 
             apartamentosContainer.innerHTML = ''; // Limpa os botões existentes
             normasContainer.innerHTML = ''; // Limpa as normas existentes
             contatosTableBody.innerHTML = ''; // Limpa contatos
+            searchInput.value = ''; // Limpa o campo de pesquisa
+            resultadosBody.innerHTML = ''; // Limpa os resultados da pesquisa
 
             if (currentCondominioId) {
                 const condominioInfo = condominiosData[currentCondominioId];
@@ -204,6 +208,9 @@
 
                 // Atualiza as normas
                 normasContainer.innerHTML = `<p>${condominioInfo.norma}</p>`;
+
+                // Mostra os apartamentos
+                showApartamentos();
             } else {
                 normasContainer.innerHTML = '<p>Selecione um condomínio para ver as normas.</p>';
             }
