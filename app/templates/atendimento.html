@@ -1,6 +1,6 @@
+<!DOCTYPE html>
 {% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html %}
 {% block menu %}{% endblock %}
 
 {% block titulofixo %}
@@ -20,20 +20,38 @@
     </select>
 </div>
 <br><br>
+
 <div style="display: flex; justify-content: space-around; max-width: 80%; margin: 0 auto;">
     <div class="observacao" style="flex: 1; margin-right: 20px;">
         <h5>Observações do Condomínio</h5>
         <hr>
         <div id="normas-condominio" style="max-height: 200px; overflow-y: auto;">
-            <ul id="normas-list">
-                <li>Selecione um condomínio para ver as normas.</li>
-            </ul>
+            <p>Selecione um condomínio para ver as normas.</p>
         </div>
     </div>
 
     <div class="col col-contatos" style="flex: 1;">
+        <div class="acoes">
+            <h5>Ações</h5>
+            <button class="btn btn-primary">PP</button>
+            <button class="btn btn-primary">PH</button>
+            <button class="btn btn-primary">G Subsolo</button>
+            <button class="btn btn-primary">G Cima</button>
+        </div>
+
+        <div class="subramais">
+            <h5>Subramais</h5>
+            <button class="btn btn-primary">91 PP</button>
+            <button class="btn btn-primary">92 PH</button>
+            <button class="btn btn-primary">93 E</button>
+            <button class="btn btn-primary">95 PB</button>
+            <button class="btn btn-primary">100 Zelador (a)</button>
+        </div>
+
         <h5>Contatos</h5>
+        <button id="voltar-btn" style="display: none; margin-bottom: 10px;" onclick="showApartamentos()" class="btn btn-primary">Aptos</button>
         <hr>
+
         <table id="contatos-table" style="width: 100%; border-collapse: separate; border-spacing: 10px; border: 1px solid #ccc;">
             <thead>
                 <tr style="background-color: #d0d0d0;">
@@ -49,44 +67,53 @@
     </div>
 </div>
 
+<div style="margin-top: 20px; display: flex; justify-content: center;">
+    <div style="width: 50%;">
+        <input type="text" id="search" placeholder="Pesquisar..." style="width: 80%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+        <button class="btn btn-primary" onclick="performSearch()" style="padding: 10px;">Buscar</button>
+        <div class="resultado-container" style="max-height: 200px; overflow-y: auto; margin-top: 10px;">
+            <table id="resultado-table" style="width: 100%; border-collapse: collapse;">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Apartamento</th>
+                        <th>Telefone</th>
+                    </tr>
+                </thead>
+                <tbody id="resultado-body">
+                    <!-- Resultados da pesquisa aqui -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
 <br>
 
-<!-- Seção de Câmeras -->
 <div style="margin-top: 20px;">
-
-        <div class="col col-cameras">
-            <hr>
-            <div style="margin-top: 10px; display: flex; width: 100%;">
-                <input type="text" id="search" placeholder="Pesquisar..." style="flex: 0 0 80%; padding: 10px; border: 1px solid #ccc; border-radius: 5px 0 0 5px;">
-                <button class="btn btn-primary" onclick="performSearch()" style="flex: 0 0 20%; border-radius: 0 5px 5px 0; padding: 10px;">Buscar</button>
-            </div>
-
-            <div class="resultado-container" style="max-height: 200px; overflow-y: auto; margin-top: 10px;">
-                <table id="resultado-table" style="width: 100%; border-collapse: collapse;">
-                    <thead>
-                        <tr>
-                            <th>Nome</th>
-                            <th>Apartamento</th>
-                            <th>Telefone</th>
-                        </tr>
-                    </thead>
-                    <tbody id="resultado-body">
-                        <!-- Resultados da pesquisa aqui -->
-                    </tbody>
-                </table>
+    <div style="display: flex; justify-content: space-between; max-width: 80%; margin: 0 auto;">
+        <div class="col-apartamentos" style="flex: 1;">
+            <h5>Apartamentos</h5>
+            <div id="apartamentos-container">
+                <!-- Botões dos apartamentos aqui -->
             </div>
         </div>
-    <h5>Câmeras</h5>
-    <hr>
-    <div class="cameras">
-        <div class="camera">Câmera 1</div>
-        <div class="camera">Câmera 2</div>
-        <div class="camera">Câmera 3</div>
-        <div class="camera">Câmera 4</div>
+
+        <div class="col col-cameras" style="flex: 1;">
+            <h5>Câmeras</h5>
+            <hr>
+            <div class="cameras">
+                <div class="camera">Câmera 1</div>
+                <div class="camera">Câmera 2</div>
+                <div class="camera">Câmera 3</div>
+                <div class="camera">Câmera 4</div>
+            </div>
+        </div>
     </div>
 </div>
 
 <br><br>
+
 {% endblock %}
 
 <html lang="pt-BR">
@@ -109,72 +136,21 @@
             background-color: #f9f9f9;
             box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
         }
+        #apartamentos-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        #apartamentos-container button {
+            flex: 0 0 calc(20.66% - 30px);
+            margin: 2px;
+            height: 50px;
+            font-size: 18px;
+        }
     </style>
 </head>
 
 <body>
-    <div style="display: flex;">
-        <div class="col col-chamadas">
-            <h5>Chamadas</h5>
-            <hr>
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Descrição</th>
-                        <th>Data</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Chamadas estão aqui -->
-                </tbody>
-            </table>
-        </div>
-
-
-        <div class="col col-contatos">
-             <div class="acoes">
-                <h5>Ações</h5>
-                <button class="btn btn-primary">PP</button>
-                <button class="btn btn-primary">PH</button>
-                <button class="btn btn-primary">G Subsolo</button>
-                <button class="btn btn-primary">G Cima</button>
-            </div>
-
-            <div class="subramais">
-                <h5>Subramais</h5>
-                <button class="btn btn-primary">91 PP</button>
-                <button class="btn btn-primary">92 PH</button>
-                <button class="btn btn-primary">93 E</button>
-                <button class="btn btn-primary">95 PB</button>
-                <button class="btn btn-primary">100 Zelador (a)</button>
-            </div>
-            <div class="col-apartamentos">
-                <h5>Apartamentos</h5>
-                <div id="apartamentos-container" style="display: flex; flex-wrap: wrap;">
-                    <!-- Botões dos apartamentos aqui -->
-                </div>
-            </div>
-            <div class="col-servicos">
-                <h5>Prestadores de Serviço</h5>
-                <hr>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Nome</th>
-                            <th>Serviço</th>
-                            <th>Telefone</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Prestadores aqui -->
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-
     <script>
         const condominiosData = {
             {% for condominio in condominios %}
@@ -237,82 +213,41 @@
             const contatosTableBody = document.getElementById('contatos-table').getElementsByTagName('tbody')[0];
             contatosTableBody.innerHTML = ''; // Limpa os contatos anteriores
 
-            if (apartamento.pessoas.length > 0) {
-                // Agrupa pessoas por parentesco
-                const contatosAgrupados = {};
+            document.getElementById('apartamentos-container').style.display = 'none'; // Esconde os apartamentos
+            document.getElementById('voltar-btn').style.display = 'block'; // Exibe o botão de voltar
 
-                apartamento.pessoas.forEach(pessoa => {
-                    const parentesco = pessoa.parentesco || "Outros"; // Define um grupo para parentesco desconhecido
-                    if (!contatosAgrupados[parentesco]) {
-                        contatosAgrupados[parentesco] = [];
-                    }
-                    contatosAgrupados[parentesco].push(pessoa);
-                });
-
-                // Ordena os grupos de parentesco
-                const parentescosOrdenados = Object.keys(contatosAgrupados).sort();
-
-                // Adiciona cada grupo à tabela
-                parentescosOrdenados.forEach(parentesco => {
-                    const grupo = contatosAgrupados[parentesco];
-
-                    // Adiciona uma linha de título para o parentesco
-                    const headerRow = contatosTableBody.insertRow();
-                    const headerCell = headerRow.insertCell(0);
-                    headerCell.colSpan = 3; // Ocupa todas as colunas
-                    headerCell.innerText = parentesco; // Título do parentesco
-                    headerCell.style.fontWeight = 'bold'; // Negrito para o título
-                    headerCell.style.backgroundColor = '#d0d0d0'; // Cor de fundo para o título
-                    headerCell.style.textAlign = 'center'; // Centraliza o texto
-
-                    // Adiciona as pessoas desse parentesco
-                    grupo.forEach(pessoa => {
-                        const row = contatosTableBody.insertRow();
-                        row.insertCell(0).innerText = pessoa.nome;
-                        row.insertCell(1).innerText = pessoa.celular;
-                        row.insertCell(2).innerText = pessoa.parentesco;
-                    });
-                });
-            } else {
+            apartamento.pessoas.forEach(pessoa => {
                 const row = contatosTableBody.insertRow();
-                row.insertCell(0).colSpan = 3; // Ocupa todas as colunas
-                row.cells[0].innerText = 'Não há moradores cadastrados para este apartamento.';
-            }
+                row.insertCell(0).textContent = pessoa.nome;
+                row.insertCell(1).textContent = pessoa.celular;
+                row.insertCell(2).textContent = pessoa.parentesco;
+            });
+        }
+
+        function showApartamentos() {
+            document.getElementById('apartamentos-container').style.display = 'flex'; // Exibe os apartamentos
+            document.getElementById('voltar-btn').style.display = 'none'; // Esconde o botão de voltar
         }
 
         function performSearch() {
             const searchTerm = document.getElementById('search').value.toLowerCase();
-            const resultadoBody = document.getElementById('resultado-body');
-            resultadoBody.innerHTML = ''; // Limpa os resultados anteriores
+            const resultadosBody = document.getElementById('resultado-body');
+            resultadosBody.innerHTML = ''; // Limpa resultados anteriores
 
             if (currentCondominioId) {
                 const condominioInfo = condominiosData[currentCondominioId];
 
-                // Filtra moradores
-                const moradoresFiltrados = condominioInfo.apartamentos.flatMap(apartamento => {
-                    return apartamento.pessoas.map(pessoa => ({
-                        ...pessoa,
-                        apartamento: apartamento.nome
-                    })).filter(pessoa => {
-                        return pessoa.nome.toLowerCase().includes(searchTerm) ||
-                               pessoa.celular.toLowerCase().includes(searchTerm) ||
-                               apartamento.nome.toLowerCase().includes(searchTerm);
+                condominioInfo.apartamentos.forEach(apartamento => {
+                    apartamento.pessoas.forEach(pessoa => {
+                        if (pessoa.nome.toLowerCase().includes(searchTerm) ||
+                            pessoa.celular.includes(searchTerm)) {
+                            const row = resultadosBody.insertRow();
+                            row.insertCell(0).textContent = pessoa.nome;
+                            row.insertCell(1).textContent = apartamento.nome;
+                            row.insertCell(2).textContent = pessoa.celular;
+                        }
                     });
                 });
-
-                // Adiciona os resultados à tabela
-                moradoresFiltrados.forEach(pessoa => {
-                    const row = resultadoBody.insertRow();
-                    row.insertCell(0).innerText = pessoa.nome;
-                    row.insertCell(1).innerText = pessoa.apartamento;
-                    row.insertCell(2).innerText = pessoa.celular;
-                });
-
-                if (moradoresFiltrados.length === 0) {
-                    const row = resultadoBody.insertRow();
-                    row.insertCell(0).colSpan = 3; // Ocupa todas as colunas
-                    row.cells[0].innerText = 'Nenhum morador encontrado.';
-                }
             }
         }
     </script>
